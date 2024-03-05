@@ -13,6 +13,10 @@
       padding-right: 30px;
       padding-top: 15px;
     }
+
+    .customWidth {
+        width: 25rem;
+    }
   }
 
   body {
