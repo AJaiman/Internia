@@ -5,7 +5,7 @@
 @layer components {
     .trap1 {
       width: screen;
-      height: 50vh;
+      height: 30rem;
       clip-path: polygon(0% 0%, 100% 0%, 100% 50%, 0% 100%);
       background-color: #F2E9D9;
       border-radius: 20px;
