@@ -13,7 +13,7 @@ export default function Home() {
       {/* Bacground of Section 1 */}
       <div className="trap1"></div>
       {/* Content of Section 1 */}
-      <div className="absolute top-0 left-0 pt-[15px] pl-[50px] pr-[30px] w-full border border-black">
+      <div className="absolute top-0 left-0 pt-[20px] pl-[50px] pr-[30px] w-full">
         <Navbar />
         <div className="flex justify-between mt-28 px-24">
           <section className="flex flex-col gap-3">
@@ -28,10 +28,10 @@ export default function Home() {
             <img className="size-96 rounded-lg border border-black" src="placeholderimage.png" alt="Nun"/>
           </section>
         </div>
-        <div className="flex justify-between px-44 border border-black">
-          <FrontPageStat mainPart={'25+'} subPart={'Professors'}/>
-          <FrontPageStat mainPart={'100+'} subPart={'High-Schoolers'}/>
-          <FrontPageStat mainPart={'5+'} subPart={'Colleges'}/>
+        <div className="flex justify-between absolute top-[85%] left-0 min-w-full px-44">
+          <FrontPageStat mainPart={'25+'} subPart={'Professors'} padding={'pt-10'}/>
+          <FrontPageStat mainPart={'100+'} subPart={'High-Schoolers'} padding={'pb-16'}/>
+          <FrontPageStat mainPart={'5+'} subPart={'Colleges'} padding={'pt-10'}/>
         </div>
       </div>
     </div>
