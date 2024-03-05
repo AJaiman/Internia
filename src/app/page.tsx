@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Navbar from "./components/navbar/navbar";
 import { MdKeyboardArrowRight } from "react-icons/md";
+import FrontPageStat from "./components/front-page-stat";
 
 //
 
@@ -8,12 +9,13 @@ export default function Home() {
   return (
     <>
     {/* Parent of Section 1 */}
-    <div className="relative border border-black">
+    <div className="relative">
       {/* Bacground of Section 1 */}
       <div className="trap1"></div>
-      <div className="absolute top-0 left-0 pt-[15px] pl-[50px] pr-[30px] w-full">
+      {/* Content of Section 1 */}
+      <div className="absolute top-0 left-0 pt-[15px] pl-[50px] pr-[30px] w-full border border-black">
         <Navbar />
-        <div className="flex justify-between mt-28 px-20">
+        <div className="flex justify-between mt-28 px-24">
           <section className="flex flex-col gap-3">
             <div>
               <h1 className="text-7xl font-bold">A <span className="text-orange-600">&nbsp;Network</span></h1>
@@ -26,7 +28,11 @@ export default function Home() {
             <img className="size-96 rounded-lg border border-black" src="placeholderimage.png" alt="Nun"/>
           </section>
         </div>
-        
+        <div className="flex justify-between px-44 border border-black">
+          <FrontPageStat mainPart={'25+'} subPart={'Professors'}/>
+          <FrontPageStat mainPart={'100+'} subPart={'High-Schoolers'}/>
+          <FrontPageStat mainPart={'5+'} subPart={'Colleges'}/>
+        </div>
       </div>
     </div>
     </>
