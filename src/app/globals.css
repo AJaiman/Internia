@@ -11,6 +11,15 @@
       border-radius: 20px;
     }
 
+    .trap2 {
+      width: screen;
+      height: 60rem;
+      clip-path: polygon(0% 0%, 100% 0%, 100% 75%, 0% 100%);
+      background-color: #D5DAE2;
+      opacity: .2;
+      border-radius: 20px;
+    }
+
     .customWidth {
         width: 25rem;
     }

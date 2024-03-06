@@ -8,7 +8,7 @@ export default function Home() {
   return (
     <>
     {/* Parent of Section 1 */}
-    <div className="relative">
+    <div className="relative h-[50rem]">
       {/* Bacground of Section 1 */}
       <div className="trap1"></div>
       {/* Content of Section 1 */}
@@ -33,6 +33,11 @@ export default function Home() {
           <FrontPageStat mainPart={'5+'} subPart={'Colleges'} padding={'pt-10'}/>
         </div>
       </div>
+    </div>
+
+    {/* Parent of Section 2 */}
+    <div className="relative">
+      <div className="trap2"></div>
     </div>
     </>
   );
