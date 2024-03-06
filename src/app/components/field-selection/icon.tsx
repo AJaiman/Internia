@@ -3,13 +3,13 @@
 import React, { useState } from 'react';
 import Image from 'next/image';
 
-interface CircleProps {
+type CircleProps = {
   imageUrl: string;
   radius: number;
 }
 
-export default function Icon({ imageUrl, radius }: CircleProps): JSX.Element {
-  const diameter = radius * 2;
+export default function Icon(props: CircleProps): JSX.Element {
+  const diameter = props.radius * 2;
   const [isHovered, setIsHovered] = useState(false);
 
   // Define inline styles for the circle
@@ -32,7 +32,7 @@ export default function Icon({ imageUrl, radius }: CircleProps): JSX.Element {
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      <Image src={imageUrl} alt="Circle" width={diameter} height={diameter} />
+      <Image src={props.imageUrl} alt="Circle" width={diameter} height={diameter} />
     </div>
   );
 }
