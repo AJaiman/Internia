@@ -8,7 +8,7 @@ interface CircleProps {
   radius: number;
 }
 
-export function Icon({ imageUrl, radius }: CircleProps): JSX.Element {
+export default function Icon({ imageUrl, radius }: CircleProps): JSX.Element {
   const diameter = radius * 2;
   const [isHovered, setIsHovered] = useState(false);
 
@@ -35,9 +35,4 @@ export function Icon({ imageUrl, radius }: CircleProps): JSX.Element {
       <Image src={imageUrl} alt="Circle" width={diameter} height={diameter} />
     </div>
   );
-}
-
-export default function FieldSelection() {
-  const circleImage = Icon({ imageUrl: "/icons/plant.png", radius: 45 }); // Note: Use relative path here
-  return circleImage;
 }

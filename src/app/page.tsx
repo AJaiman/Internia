@@ -2,7 +2,7 @@ import Image from "next/image";
 import Navbar from "./components/navbar/navbar";
 import { MdKeyboardArrowRight } from "react-icons/md";
 import FrontPageStat from "./components/front-page-stat";
-import FieldSelection  from "./components/field-selection/icon";
+import FieldSelection  from "./components/field-selection/field-selection";
 
 export default function Home() {
   return (
