@@ -22,6 +22,7 @@ export default function UserTypeSelection() {
             <span>Student</span>
             <span>Professor</span>
         </div>
+        <div className="absolute top-0 left-0 w-[17.25rem] h-8 z-1"></div>
         
     </div>
     );
