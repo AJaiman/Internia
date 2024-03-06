@@ -14,7 +14,6 @@ export default function Home() {
       {/* Content of Section 1 */}
       <div className="absolute top-0 left-0 pt-[20px] pl-[50px] pr-[30px] w-full">
         <Navbar />
-        <FieldSelection />
         <div className="flex justify-between mt-28 px-24">
           <section className="flex flex-col gap-3">
             <div>

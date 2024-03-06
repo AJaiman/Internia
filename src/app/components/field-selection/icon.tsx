@@ -8,30 +8,11 @@ type CircleProps = {
   radius: number;
 }
 
-export default function Icon(props: CircleProps): JSX.Element {
+export default function Icon(props: CircleProps) {
   const diameter = props.radius * 2;
-  const [isHovered, setIsHovered] = useState(false);
-
-  // Define inline styles for the circle
-  const circleStyle = {
-    width: `${diameter}px`,
-    height: `${diameter}px`,
-    borderRadius: '50%', // Ensure the div is a perfect circle
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    overflow: 'hidden',
-    padding: `${diameter*0.175}px`,
-    backgroundColor: "#E2DDD5",
-    boxShadow: isHovered ? '0 0 10px rgba(0, 0, 0, 0.2)' : 'none',
-  };
 
   return (
-    <div 
-      style={circleStyle}
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
-    >
+    <div style={{padding: (diameter*0.175)}} className={`h-fit w-fit rounded-full bg-[#E2DDD5] hover:drop-shadow-lg transition duration-400`}>
       <Image src={props.imageUrl} alt="Circle" width={diameter} height={diameter} />
     </div>
   );
