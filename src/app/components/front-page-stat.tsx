@@ -10,8 +10,8 @@ type StatProps = {
 export default function FrontPageStat(props: StatProps) {
     return (
         <div className={"grid grid-cols-1 place-items-center " + props.padding}>
-            <h1 className="text-9xl font-medium text-orange-600">{props.mainPart}</h1>
-            <p className="text-4xl text-black">{props.subPart}</p>
+            <h1 className="text-9xl font-medium text-orange-600 drop-shadow-lg">{props.mainPart}</h1>
+            <p className="text-4xl text-black drop-shadow-lg">{props.subPart}</p>
         </div>
     );
 }
