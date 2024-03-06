@@ -12,14 +12,17 @@ export default function UserTypeSelection() {
   
     return (
     <div
-        className={`relative gap-28 w-fit h-8 rounded-full bg-gray-300 cursor-pointer px-4 py-1`}
+        className={`relative gap-28 w-[17.25rem] h-8 rounded-full bg-gray-300 cursor-pointer px-4 py-1`}
         onClick={handleToggle}
     >
-        <div className="flex gap-28">
+        
+        <span className={`absolute top-0 left-0 h-full px-4 py-1 rounded-full bg-orange-600 text-orange-600 transition duration-200 ${isStudent ? 'translate-x-0' : 'translate-x-[10.70rem]'}`}>{isStudent ? 'Student' : 'Professor'}</span>
+
+        <div className="absolute top-1 left-4 flex gap-28">
             <span>Student</span>
             <span>Professor</span>
         </div>
-        <span className={`absolute top-0 left-0 h-full px-4 py-1 rounded-full bg-orange-600 text-orange-600 transition duration-200 ${isStudent ? 'translate-x-0' : 'translate-x-[10.70rem]'}`}>{isStudent ? 'Student' : 'Professor'}</span>
+        
     </div>
     );
 }
