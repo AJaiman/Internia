@@ -3,8 +3,6 @@ import Navbar from "./components/navbar/navbar";
 import { MdKeyboardArrowRight } from "react-icons/md";
 import FrontPageStat from "./components/front-page-stat";
 
-//
-
 export default function Home() {
   return (
     <>
