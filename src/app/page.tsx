@@ -2,6 +2,7 @@ import Image from "next/image";
 import Navbar from "./components/navbar/navbar";
 import { MdKeyboardArrowRight } from "react-icons/md";
 import FrontPageStat from "./components/front-page-stat";
+import FieldSelection  from "./components/field-selection/icon";
 
 export default function Home() {
   return (
@@ -13,6 +14,7 @@ export default function Home() {
       {/* Content of Section 1 */}
       <div className="absolute top-0 left-0 pt-[20px] pl-[50px] pr-[30px] w-full">
         <Navbar />
+        <FieldSelection />
         <div className="flex justify-between mt-28 px-24">
           <section className="flex flex-col gap-3">
             <div>

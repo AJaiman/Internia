@@ -1,20 +1,43 @@
-import React from 'react';
+"use client"
 
-const Icon: React.FC = () => {
-    return (
-      <div>
-        <h1>Circle Image Example</h1>
-        <CircleImage imageUrl=""/>
-      </div>
-    );
+import React, { useState } from 'react';
+import Image from 'next/image';
+
+interface CircleProps {
+  imageUrl: string;
+  radius: number;
+}
+
+export function Icon({ imageUrl, radius }: CircleProps): JSX.Element {
+  const diameter = radius * 2;
+  const [isHovered, setIsHovered] = useState(false);
+
+  // Define inline styles for the circle
+  const circleStyle = {
+    width: `${diameter}px`,
+    height: `${diameter}px`,
+    borderRadius: '50%', // Ensure the div is a perfect circle
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    overflow: 'hidden',
+    padding: `${diameter*0.175}px`,
+    backgroundColor: "#E2DDD5",
+    boxShadow: isHovered ? '0 0 10px rgba(0, 0, 0, 0.2)' : 'none',
   };
-  
-  export default Icon;
 
-function CircleImage({ imageUrl }: { imageUrl: string }) {
   return (
-    <div style={{ width: '100px', height: '100px', borderRadius: '50%', overflow: 'hidden', position: 'relative' }}>
-      <img src={imageUrl} alt="circle" style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '50%' }} />
+    <div 
+      style={circleStyle}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+    >
+      <Image src={imageUrl} alt="Circle" width={diameter} height={diameter} />
     </div>
   );
+}
+
+export default function FieldSelection() {
+  const circleImage = Icon({ imageUrl: "/icons/plant.png", radius: 45 }); // Note: Use relative path here
+  return circleImage;
 }
