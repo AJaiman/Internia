@@ -14,11 +14,11 @@ export default function TypedText() {
                 cursor
                 /></span>
             </div>
-            <div><Typewriter 
+            <div className="ml-[15.70vw]"><Typewriter 
             words={['internships.']}
             cursor
             /></div>
-            <div><Typewriter 
+            <div className="ml-[15.70vw]"><Typewriter 
             words={['oppurtunities.']}
             cursor
             /></div>
