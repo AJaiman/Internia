@@ -40,7 +40,11 @@ export default function Home() {
     <div className="relative">
       <div className="trap2"></div>
       <div className="absolute top-0 left-0 pt-[60px] pl-[50px] pr-[30px] w-full">
-        <TypedText />
+        <div className="flex">
+          <section>
+            <TypedText />
+          </section>
+        </div>
       </div>
     </div>
     </>
