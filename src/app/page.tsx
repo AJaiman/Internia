@@ -3,6 +3,7 @@ import Navbar from "./components/navbar/navbar";
 import { MdKeyboardArrowRight } from "react-icons/md";
 import FrontPageStat from "./components/front-page-stat";
 import FieldSelection  from "./components/field-selection/field-selection";
+import TypedText from "./components/typed-text";
 
 export default function Home() {
   return (
@@ -38,6 +39,9 @@ export default function Home() {
     {/* Parent of Section 2 */}
     <div className="relative">
       <div className="trap2"></div>
+      <div className="absolute top-0 left-0 pt-[60px] pl-[50px] pr-[30px] w-full">
+        <TypedText />
+      </div>
     </div>
     </>
   );
