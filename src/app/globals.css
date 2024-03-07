@@ -23,8 +23,21 @@
     .customWidth {
         width: 25rem;
     }
+
+    .fadeInAnim {
+      animation: fadeIn 1s;
+    }
   }
 
   body {
     padding: 20px;
+  }
+
+  @keyframes fadeIn {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
   }

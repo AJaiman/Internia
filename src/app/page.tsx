@@ -14,7 +14,10 @@ export default function Home() {
   //Animations
 
   //Typewriter Animation
-  const [showComponent, setShowComponent] = useState(false);
+  const [showTypedText, setShowTypedText] = useState(false);
+
+  //Fade-In Section 2 Animation
+  const [showSection2Info, setShowSection2Info] = useState(false);
 
   return (
     <>
@@ -52,16 +55,18 @@ export default function Home() {
       <div className="absolute top-0 left-0 pt-[60px] pl-[10vw] pr-[30px] w-full">
         <div className="flex">
           <section className="flex flex-col gap-[7vh] max-w-[40vw]">
-            <InView onChange={(inView, entry) => {setShowComponent(inView)}}>
-              {showComponent ? <TypedText /> : null}
+            <InView onChange={(inView, entry) => {setShowTypedText(inView)}}>
+              {showTypedText ? <TypedText /> : null}
             </InView>
-            <p className="max-w-[50vh] text-lg">
-            Finding internships has <span className="font-bold">never</span> been 
-            simpler. Choose your <span className="text-orange-600">field of interest</span>, 
-            location, and other relevant information, 
-            and have <span className="text-orange-600">hundreds</span> of professors and 
-            programs waiting at your fingertips. 
-            </p>
+            <InView onChange={(inView, entry) => {setShowSection2Info(inView)}} threshold={0.3}>
+              {showSection2Info ? <p className="max-w-[50vh] text-lg fadeInAnim">
+              Finding internships has <span className="font-bold">never</span> been 
+              simpler. Choose your <span className="text-orange-600">field of interest</span>, 
+              location, and other relevant information, 
+              and have <span className="text-orange-600">hundreds</span> of professors and 
+              programs waiting at your fingertips. 
+              </p> : null}
+            </InView>
           </section>
         </div>
       </div>
