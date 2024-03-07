@@ -49,12 +49,19 @@ export default function Home() {
     {/* Parent of Section 2 */}
     <div className="relative">
       <div className="trap2"></div>
-      <div className="absolute top-0 left-0 pt-[60px] pl-[50px] pr-[30px] w-full">
+      <div className="absolute top-0 left-0 pt-[60px] pl-[10vw] pr-[30px] w-full">
         <div className="flex">
-          <section>
+          <section className="flex flex-col gap-[7vh] max-w-[40vw]">
             <InView onChange={(inView, entry) => {setShowComponent(inView)}}>
               {showComponent ? <TypedText /> : null}
             </InView>
+            <p className="max-w-[50vh] text-lg">
+            Finding internships has <span className="font-bold">never</span> been 
+            simpler. Choose your <span className="text-orange-600">field of interest</span>, 
+            location, and other relevant information, 
+            and have <span className="text-orange-600">hundreds</span> of professors and 
+            programs waiting at your fingertips. 
+            </p>
           </section>
         </div>
       </div>
