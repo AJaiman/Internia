@@ -1,11 +1,21 @@
+'use client'
+
 import Image from "next/image";
 import Navbar from "./components/navbar/navbar";
 import { MdKeyboardArrowRight } from "react-icons/md";
 import FrontPageStat from "./components/front-page-stat";
 import FieldSelection  from "./components/field-selection/field-selection";
 import TypedText from "./components/typed-text";
+import { InView } from "react-intersection-observer";
+import { useState } from "react";
 
 export default function Home() {
+
+  //Animations
+
+  //Typewriter Animation
+  const [showComponent, setShowComponent] = useState(false);
+
   return (
     <>
     {/* Parent of Section 1 */}
@@ -42,7 +52,9 @@ export default function Home() {
       <div className="absolute top-0 left-0 pt-[60px] pl-[50px] pr-[30px] w-full">
         <div className="flex">
           <section>
-            <TypedText />
+            <InView onChange={(inView, entry) => {setShowComponent(inView)}}>
+              {showComponent ? <TypedText /> : null}
+            </InView>
           </section>
         </div>
       </div>
