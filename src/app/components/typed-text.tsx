@@ -15,12 +15,15 @@ export default function TypedText() {
                 /></span>
             </div>
             <div className="ml-[15.70vw]"><Typewriter 
-            words={['internships.']}
+            words={['', 'internships.']}
             cursor
+            delaySpeed={900}
+            
             /></div>
             <div className="ml-[15.70vw]"><Typewriter 
-            words={['oppurtunities.']}
+            words={['', 'oppurtunities.']}
             cursor
+            delaySpeed={2000}
             /></div>
         </h1>
     );
