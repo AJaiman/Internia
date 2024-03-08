@@ -84,7 +84,7 @@ export default function Home() {
         <div className="flex justify-between items-center">
           <section className="flex flex-col">
             <div className="min-h-[20vh]">
-              <InView onChange={(inView, entry) => {setShowSection2SecondTitle(inView)}}>
+              <InView onChange={(inView, entry) => {setShowSection2SecondTitle(inView)}} triggerOnce>
                 {showSection2SecondTitle ? <h1 className="text-5xl gap-2 min-h-[20vh] min-w-[38vw] slideInAnim">
                   <span className="text-orange-600 font-bold">Connect</span> with <span className="italic">your</span> peers.
                 </h1> : null}
