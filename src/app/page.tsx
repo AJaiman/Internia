@@ -52,21 +52,27 @@ export default function Home() {
     {/* Parent of Section 2 */}
     <div className="relative">
       <div className="trap2"></div>
-      <div className="absolute top-0 left-0 pt-[60px] pl-[10vw] pr-[30px] w-full">
-        <div className="flex">
+      <div className="absolute top-0 left-0 pt-[60px] pl-[10vw] pr-[5vw] w-full">
+        <div className="flex justify-between items-center border border-black">
+          {/* Top Info Text */}
           <section className="flex flex-col gap-[7vh] max-w-[40vw]">
             <InView onChange={(inView, entry) => {setShowTypedText(inView)}}>
               {showTypedText ? <TypedText /> : null}
             </InView>
-            <InView onChange={(inView, entry) => {setShowSection2Info(inView)}} threshold={0.3}>
-              {showSection2Info ? <p className="max-w-[50vh] text-lg fadeInAnim">
-              Finding internships has <span className="font-bold">never</span> been 
-              simpler. Choose your <span className="text-orange-600">field of interest</span>, 
-              location, and other relevant information, 
-              and have <span className="text-orange-600">hundreds</span> of professors and 
-              programs waiting at your fingertips. 
-              </p> : null}
-            </InView>
+            <div className="min-w-[30vw] min-h-[20vh] border border-black">
+              <InView onChange={(inView, entry) => {setShowSection2Info(inView)}} threshold={0.3}>
+                {showSection2Info ? <p className="max-w-[30vw] text-lg fadeInAnim">
+                Finding internships has <span className="font-bold">never</span> been 
+                simpler. Choose your <span className="text-orange-600">field of interest</span>, 
+                location, and other relevant information, 
+                and have <span className="text-orange-600">hundreds</span> of professors and 
+                programs waiting at your fingertips. 
+                </p> : null}
+              </InView>
+            </div>
+          </section>
+          <section>
+            <FieldSelection />
           </section>
         </div>
       </div>
