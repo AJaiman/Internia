@@ -53,13 +53,13 @@ export default function Home() {
     <div className="relative">
       <div className="trap2"></div>
       <div className="absolute top-0 left-0 pt-[60px] pl-[10vw] pr-[5vw] w-full">
-        <div className="flex justify-between items-center border border-black">
+        <div className="flex justify-between items-center">
           {/* Top Info Text */}
           <section className="flex flex-col gap-[7vh] max-w-[40vw]">
             <InView onChange={(inView, entry) => {setShowTypedText(inView)}}>
               {showTypedText ? <TypedText /> : null}
             </InView>
-            <div className="min-w-[30vw] min-h-[20vh] border border-black">
+            <div className="min-w-[30vw] min-h-[20vh]">
               <InView onChange={(inView, entry) => {setShowSection2Info(inView)}} threshold={0.3}>
                 {showSection2Info ? <p className="max-w-[30vw] text-lg fadeInAnim">
                 Finding internships has <span className="font-bold">never</span> been 
