@@ -18,6 +18,7 @@ export default function Home() {
 
   //Fade-In Section 2 Animation
   const [showSection2Info, setShowSection2Info] = useState(false);
+  const [showSection2Info2, setShowSection2Info2] = useState(false);
 
   //Slide-In from Left Section 2 Animation
   const [showSection2SecondTitle, setShowSection2SecondTitle] = useState(false);
@@ -55,7 +56,7 @@ export default function Home() {
     {/* Parent of Section 2 */}
     <div className="relative">
       <div className="trap2"></div>
-      <div className="absolute top-0 left-0 pt-[60px] pl-[10vw] pr-[5vw] w-full">
+      <div className="absolute flex flex-col gap-[10vh] top-0 left-0 pt-[60px] pl-[10vw] pr-[5vw] w-full">
         <div className="flex justify-between items-center">
           {/* Top Info Text */}
           <section className="flex flex-col gap-[7vh] max-w-[40vw]">
@@ -65,7 +66,7 @@ export default function Home() {
               </InView>
             </div>
             <div className="min-w-[30vw] min-h-[20vh]">
-              <InView onChange={(inView, entry) => {setShowSection2Info(inView)}} threshold={0.3} triggerOnce>
+              <InView onChange={(inView, entry) => {setShowSection2Info(inView)}} triggerOnce>
                 {showSection2Info ? <p className="max-w-[30vw] text-lg fadeInAnim">
                 Finding internships has <span className="font-bold">never</span> been 
                 simpler. Choose your <span className="text-orange-600">field of interest</span>, 
@@ -82,10 +83,21 @@ export default function Home() {
         </div>
         <div className="flex justify-between items-center">
           <section className="flex flex-col">
-            <InView onChange={(inView, entry) => {setShowSection2SecondTitle(inView)}}>
-              {showSection2SecondTitle ? <h1 className="text-5xl gap-2 min-h-[20vh] min-w-[38vw] slideInAnim">
-                <span className="text-orange-600 font-bold">Connect</span> with <span className="italic">your</span> peers.
-              </h1> : null}
+            <div className="min-h-[20vh]">
+              <InView onChange={(inView, entry) => {setShowSection2SecondTitle(inView)}}>
+                {showSection2SecondTitle ? <h1 className="text-5xl gap-2 min-h-[20vh] min-w-[38vw] slideInAnim">
+                  <span className="text-orange-600 font-bold">Connect</span> with <span className="italic">your</span> peers.
+                </h1> : null}
+              </InView>
+            </div>
+            <InView onChange={(inView, entry) => {setShowSection2Info2(inView)}} triggerOnce>
+                {showSection2Info2 ? <p className="max-w-[30vw] text-lg fadeInAnim">
+                Finding internships has <span className="font-bold">never</span> been 
+                simpler. Choose your <span className="text-orange-600">field of interest</span>, 
+                location, and other relevant information, 
+                and have <span className="text-orange-600">hundreds</span> of professors and 
+                programs waiting at your fingertips. 
+                </p> : null}
             </InView>
           </section>
         </div>
