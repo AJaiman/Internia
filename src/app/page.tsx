@@ -59,9 +59,11 @@ export default function Home() {
         <div className="flex justify-between items-center">
           {/* Top Info Text */}
           <section className="flex flex-col gap-[7vh] max-w-[40vw]">
-            <InView onChange={(inView, entry) => {setShowTypedText(inView)}} triggerOnce>
-              {showTypedText ? <TypedText /> : null}
-            </InView>
+            <div className="min-h-[20vh]">
+              <InView onChange={(inView, entry) => {setShowTypedText(inView)}} triggerOnce>
+                {showTypedText ? <TypedText /> : null}
+              </InView>
+            </div>
             <div className="min-w-[30vw] min-h-[20vh]">
               <InView onChange={(inView, entry) => {setShowSection2Info(inView)}} threshold={0.3} triggerOnce>
                 {showSection2Info ? <p className="max-w-[30vw] text-lg fadeInAnim">
