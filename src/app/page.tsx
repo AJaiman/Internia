@@ -19,6 +19,9 @@ export default function Home() {
   //Fade-In Section 2 Animation
   const [showSection2Info, setShowSection2Info] = useState(false);
 
+  //Slide-In from Left Section 2 Animation
+  const [showSection2SecondTitle, setShowSection2SecondTitle] = useState(false);
+
   return (
     <>
     {/* Parent of Section 1 */}
@@ -56,11 +59,11 @@ export default function Home() {
         <div className="flex justify-between items-center">
           {/* Top Info Text */}
           <section className="flex flex-col gap-[7vh] max-w-[40vw]">
-            <InView onChange={(inView, entry) => {setShowTypedText(inView)}}>
+            <InView onChange={(inView, entry) => {setShowTypedText(inView)}} triggerOnce>
               {showTypedText ? <TypedText /> : null}
             </InView>
             <div className="min-w-[30vw] min-h-[20vh]">
-              <InView onChange={(inView, entry) => {setShowSection2Info(inView)}} threshold={0.3}>
+              <InView onChange={(inView, entry) => {setShowSection2Info(inView)}} threshold={0.3} triggerOnce>
                 {showSection2Info ? <p className="max-w-[30vw] text-lg fadeInAnim">
                 Finding internships has <span className="font-bold">never</span> been 
                 simpler. Choose your <span className="text-orange-600">field of interest</span>, 
@@ -73,6 +76,15 @@ export default function Home() {
           </section>
           <section>
             <FieldSelection />
+          </section>
+        </div>
+        <div className="flex justify-between items-center">
+          <section className="flex flex-col">
+            <InView onChange={(inView, entry) => {setShowSection2SecondTitle(inView)}}>
+              {showSection2SecondTitle ? <h1 className="text-5xl gap-2 min-h-[20vh] min-w-[38vw] slideInAnim">
+                <span className="text-orange-600 font-bold">Connect</span> with <span className="italic">your</span> peers.
+              </h1> : null}
+            </InView>
           </section>
         </div>
       </div>

@@ -13,7 +13,7 @@
 
     .trap2 {
       width: screen;
-      height: 60rem;
+      height: 150vh;
       clip-path: polygon(0% 0%, 100% 0%, 100% 75%, 0% 100%);
       background-color: #D5DAE2;
       opacity: .2;
@@ -27,6 +27,10 @@
     .fadeInAnim {
       animation: fadeIn 1s;
     }
+
+    .slideInAnim {
+      animation: slideIn 1s;
+    }
   }
 
   body {
@@ -39,5 +43,14 @@
     }
     100% {
       opacity: 1;
+    }
+  }
+
+  @keyframes slideIn {
+    0% {
+      translate: -50vw 0px;
+    }
+    100% {
+      translate: 0vw 0px;
     }
   }
