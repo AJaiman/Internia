@@ -27,7 +27,7 @@ export default function Home() {
   return (
     <>
     {/* Parent of Section 1 */}
-    <div className="relative h-[50rem]">
+    <div className="relative h-[95vh]">
       {/* Bacground of Section 1 */}
       <div className="trap1"></div>
       {/* Content of Section 1 */}
