@@ -1,10 +1,11 @@
 import React from 'react';
 import UserTypeSelection from '../components/signup-page/user-type-selection';
 
-export default function LoginPage() {
+export default function SignUpPage() {
   return (
     <>
-      <h1>Login Page</h1>
+      <h1>Sign Up Page</h1>
+      <UserTypeSelection />
     </>
   );
 }
