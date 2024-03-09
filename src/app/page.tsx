@@ -22,6 +22,7 @@ export default function Home() {
 
   //Slide-In from Left Section 2 Animation
   const [showSection2SecondTitle, setShowSection2SecondTitle] = useState(false);
+  const [showExploreCommunitiesButton, setShowExploreCommunitiesButton] = useState(false);
 
   return (
     <>
@@ -90,16 +91,20 @@ export default function Home() {
                 </h1> : null}
               </InView>
             </div>
-            <InView onChange={(inView, entry) => {setShowSection2Info2(inView)}} triggerOnce>
-                {showSection2Info2 ? <p className="max-w-[30vw] text-lg fadeInAnim">
-                Finding internships has <span className="font-bold">never</span> been 
-                simpler. Choose your <span className="text-orange-600">field of interest</span>, 
-                location, and other relevant information, 
-                and have <span className="text-orange-600">hundreds</span> of professors and 
-                programs waiting at your fingertips. 
-                </p> : null}
+            <div className="min-h-[15vh]">
+              <InView onChange={(inView, entry) => {setShowSection2Info2(inView)}} triggerOnce>
+                  {showSection2Info2 ? <p className="max-w-[30vw] text-lg fadeInAnim">
+                  Finding internships has <span className="font-bold">never</span> been 
+                  simpler. Choose your <span className="text-orange-600">field of interest</span>, 
+                  location, and other relevant information, 
+                  and have <span className="text-orange-600">hundreds</span> of professors and 
+                  programs waiting at your fingertips. 
+                  </p> : null}
+              </InView>
+            </div>
+            <InView onChange={(inView, entry) => {setShowExploreCommunitiesButton(inView)}} triggerOnce>
+              {showExploreCommunitiesButton ? <button className="slideInAnim max-w-fit flex items-center rounded-full text-white bg-orange-600 py-2 pl-4 pr-3 hover:bg-orange-400 transition duration-200">Explore Communities<MdKeyboardArrowRight className="text-xl"/></button> : null}
             </InView>
-            <button className="max-w-fit flex items-center rounded-full text-white bg-orange-600 py-2 pl-4 pr-3 hover:bg-orange-400 transition duration-200">Explore Communities<MdKeyboardArrowRight className="text-xl"/></button>
           </section>
         </div>
       </div>
