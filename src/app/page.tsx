@@ -56,8 +56,11 @@ export default function Home() {
 
     {/* Parent of Section 2 */}
     <div className="relative">
+      {/* Background of Section 2 */}
       <div className="trap2"></div>
+      {/* Content of Section 2 */}
       <div className="absolute flex flex-col gap-[10vh] top-0 left-0 pt-[60px] pl-[10vw] pr-[5vw] w-full">
+        {/* Top section of Section 2 */}
         <div className="flex justify-between items-center">
           {/* Top Info Text */}
           <section className="flex flex-col gap-[7vh] max-w-[40vw]">
@@ -78,11 +81,14 @@ export default function Home() {
               </InView>
             </div>
           </section>
+          {/* Icon Animation */}
           <section>
             <FieldSelection />
           </section>
         </div>
+        {/* Bottom section of Section 2 */}
         <div className="flex justify-between items-center">
+          {/* Bottom Info Text */}
           <section className="flex flex-col gap-[8vh]">
             <div className="min-h-[10vh]">
               <InView onChange={(inView, entry) => {setShowSection2SecondTitle(inView)}} triggerOnce>
