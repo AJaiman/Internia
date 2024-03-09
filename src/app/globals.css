@@ -20,6 +20,14 @@
       border-radius: 20px;
     }
 
+    .trap3 {
+      width: screen;
+      height: 70vh;
+      clip-path: polygon(100% 0%, 100% 100%, 0% 100%, 0% 50%);
+      background-color: #F2E9D9;
+      border-radius: 20px;
+    }
+
     .customWidth {
         width: 25rem;
     }

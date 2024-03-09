@@ -115,6 +115,12 @@ export default function Home() {
         </div>
       </div>
     </div>
+
+    {/* Parent of Section 3 */}
+    <div className="relative">
+      {/* Background of Section 3 */}
+      <div className="trap3"></div>
+    </div>
     </>
   );
 }
