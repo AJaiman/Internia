@@ -33,17 +33,17 @@ export default function Home() {
       {/* Content of Section 1 */}
       <div className="absolute top-0 left-0 pt-[3vh] pl-[2vw] pr-[1.5vw] w-full">
         <Navbar />
-        <div className="flex justify-between mt-28 px-24">
-          <section className="flex flex-col gap-3">
+        <div className="flex justify-between mt-[14vh] px-[7vw]">
+          <section className="flex flex-col gap-[1.5vh]">
             <div>
               <h1 className="text-7xl font-bold">A <span className="text-orange-600">&nbsp;Network</span></h1>
               <h1 className="text-7xl font-bold">For High-Schoolers.</h1>
             </div>
-            <p className="py-5 text-lg max-w-80 text-wrap"><span className="text-orange-600">Find&nbsp;</span>Internships.<span className="text-orange-600">&nbsp;Find&nbsp;</span>Programs.<span className="text-orange-600">&nbsp;Connect&nbsp;</span>with peers. Made simple with<span className="italic">&nbsp;Internia.&nbsp;</span></p>
+            <p className="py-5 text-lg max-w-[20vw] text-wrap"><span className="text-orange-600">Find&nbsp;</span>Internships.<span className="text-orange-600">&nbsp;Find&nbsp;</span>Programs.<span className="text-orange-600">&nbsp;Connect&nbsp;</span>with peers. Made simple with<span className="italic">&nbsp;Internia.&nbsp;</span></p>
             <button className="max-w-fit flex items-center rounded-full text-white bg-orange-600 py-2 pl-4 pr-3 hover:bg-orange-400 transition duration-200">Explore Now<MdKeyboardArrowRight className="text-xl"/></button>
           </section>
           <section>
-            <img className="size-96 rounded-lg border border-black" src="placeholderimage.png" alt="Nun"/>
+            <img className="size-[50vh] rounded-lg border border-black" src="placeholderimage.png" alt="Nun"/>
           </section>
         </div>
         <div className="flex justify-between absolute top-[85%] left-0 min-w-full px-44">
