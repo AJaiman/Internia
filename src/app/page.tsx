@@ -82,10 +82,10 @@ export default function Home() {
           </section>
         </div>
         <div className="flex justify-between items-center">
-          <section className="flex flex-col">
-            <div className="min-h-[20vh]">
+          <section className="flex flex-col gap-[8vh]">
+            <div className="min-h-[10vh]">
               <InView onChange={(inView, entry) => {setShowSection2SecondTitle(inView)}} triggerOnce>
-                {showSection2SecondTitle ? <h1 className="text-5xl gap-2 min-h-[20vh] min-w-[38vw] slideInAnim">
+                {showSection2SecondTitle ? <h1 className="text-5xl gap-2 min-h-[10vh] min-w-[38vw] slideInAnim">
                   <span className="text-orange-600 font-bold">Connect</span> with <span className="italic">your</span> peers.
                 </h1> : null}
               </InView>
@@ -99,6 +99,7 @@ export default function Home() {
                 programs waiting at your fingertips. 
                 </p> : null}
             </InView>
+            <button className="max-w-fit flex items-center rounded-full text-white bg-orange-600 py-2 pl-4 pr-3 hover:bg-orange-400 transition duration-200">Explore Communities<MdKeyboardArrowRight className="text-xl"/></button>
           </section>
         </div>
       </div>
