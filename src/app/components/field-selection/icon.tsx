@@ -1,20 +1,19 @@
-import React from 'react';
+"use client"
 
-const Icon: React.FC = () => {
-    return (
-      <div>
-        <h1>Circle Image Example</h1>
-        <CircleImage imageUrl=""/>
-      </div>
-    );
-  };
-  
-  export default Icon;
+import React, { useState } from 'react';
+import Image from 'next/image';
 
-function CircleImage({ imageUrl }: { imageUrl: string }) {
+type CircleProps = {
+  imageUrl: string;
+  radius: number;
+}
+
+export default function Icon(props: CircleProps) {
+  const diameter = props.radius * 2;
+
   return (
-    <div style={{ width: '100px', height: '100px', borderRadius: '50%', overflow: 'hidden', position: 'relative' }}>
-      <img src={imageUrl} alt="circle" style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '50%' }} />
+    <div style={{padding: (diameter*0.175)}} className={`h-fit w-fit rounded-full bg-[#E2DDD5] hover:drop-shadow-xl transition duration-400`}>
+      <Image src={props.imageUrl} alt="Circle" width={diameter} height={diameter} />
     </div>
   );
 }

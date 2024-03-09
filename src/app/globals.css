@@ -5,17 +5,52 @@
 @layer components {
     .trap1 {
       width: screen;
-      height: 30rem;
+      height: 60vh;
       clip-path: polygon(0% 0%, 100% 0%, 100% 50%, 0% 100%);
       background-color: #F2E9D9;
+      border-radius: 20px;
+    }
+
+    .trap2 {
+      width: screen;
+      height: 150vh;
+      clip-path: polygon(0% 0%, 100% 0%, 100% 75%, 0% 100%);
+      background-color: #D5DAE2;
+      opacity: .2;
       border-radius: 20px;
     }
 
     .customWidth {
         width: 35rem;
     }
+
+    .fadeInAnim {
+      animation: fadeIn 2s;
+    }
+
+    .slideInAnim {
+      animation: slideIn 1s;
+    }
   }
 
   body {
     padding: 20px;
+  }
+
+  @keyframes fadeIn {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+
+  @keyframes slideIn {
+    0% {
+      translate: -50vw 0px;
+    }
+    100% {
+      translate: 0vw 0px;
+    }
   }
