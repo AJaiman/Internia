@@ -144,6 +144,10 @@ export default function Home() {
     <div className="relative">
       {/* Background of Section 3 */}
       <div className="trap3"></div>
+      {/* Conent of Section 3 */}
+      <div className="absolute top-0 left-0 w-full h-full pt-[5vh] pl-[10vw] pr-[5vw]">
+        <h1 className="text-7xl font-bold text-orange-600">FOUNDERS:</h1>
+      </div>
     </div>
     </>
   );
