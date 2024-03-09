@@ -31,7 +31,7 @@ export default function Home() {
       {/* Bacground of Section 1 */}
       <div className="trap1"></div>
       {/* Content of Section 1 */}
-      <div className="absolute top-0 left-0 pt-[20px] pl-[50px] pr-[30px] w-full">
+      <div className="absolute top-0 left-0 pt-[3vh] pl-[2vw] pr-[1.5vw] w-full">
         <Navbar />
         <div className="flex justify-between mt-28 px-24">
           <section className="flex flex-col gap-3">
