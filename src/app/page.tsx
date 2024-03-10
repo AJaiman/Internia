@@ -9,6 +9,7 @@ import TypedText from "./components/typed-text";
 import { InView } from "react-intersection-observer";
 import Searchbar from "./components/navbar/searchbar";
 import LoginSignUp from "./components/navbar/login";
+import Founders from "./components/founders";
 
 export default function Home() {
   const [isExpanded, setIsExpanded]=useState(false);
@@ -145,8 +146,9 @@ export default function Home() {
       {/* Background of Section 3 */}
       <div className="trap3"></div>
       {/* Conent of Section 3 */}
-      <div className="absolute top-0 left-0 w-full h-full pt-[5vh] pl-[10vw] pr-[5vw]">
+      <div className="absolute flex flex-col gap-[5vh] top-0 left-0 w-full h-full pt-[5vh] pl-[10vw] pr-[5vw]">
         <h1 className="text-7xl font-bold text-orange-600">FOUNDERS:</h1>
+        <Founders />
       </div>
     </div>
     </>
