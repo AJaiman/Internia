@@ -39,6 +39,19 @@
     .slideInAnim {
       animation: slideIn 1s;
     }
+
+    .founderSlideInAnim1 {
+      animation: foundersSlideIn 1s;
+    }
+    .founderSlideInAnim2 {
+      animation: foundersSlideIn 1300ms;
+    }
+    .founderSlideInAnim3 {
+      animation: foundersSlideIn 1600ms;
+    }
+    .founderSlideInAnim4 {
+      animation: foundersSlideIn 1900ms;
+    }
   }
 
   body {
@@ -62,5 +75,16 @@
     100% {
       translate: 0vw 0px;
       opacity: 1;
+    }
+  }
+
+  @keyframes foundersSlideIn {
+    0% {
+      transform: translateX(-100vw);
+      filter: blur(5px);
+    }
+    100% {
+      transform: translateX(0);
+      filter: blur(0);
     }
   }
