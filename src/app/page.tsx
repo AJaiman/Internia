@@ -33,6 +33,10 @@ export default function Home() {
   const [showSection2SecondTitle, setShowSection2SecondTitle] = useState(false);
   const [showExploreCommunitiesButton, setShowExploreCommunitiesButton] = useState(false);
 
+  //Founders Animation
+  const [showFounders, setShowFounders] = useState(false);
+  const [showFoundersTitle, setShowFoundersTitle] = useState(false);
+
   return (
     <>
     
@@ -147,8 +151,12 @@ export default function Home() {
       <div className="trap3"></div>
       {/* Conent of Section 3 */}
       <div className="absolute flex flex-col gap-[5vh] top-0 left-0 w-full h-full pt-[5vh] pl-[3vw] pr-[5vw]">
-        <h1 className="text-7xl font-bold text-orange-600">FOUNDERS:</h1>
-        <Founders />
+        <InView onChange={(inView, entry) => setShowFoundersTitle(inView)} triggerOnce>
+          {showFoundersTitle ? <h1 className="text-7xl font-bold text-orange-600 foundersTitleSlideInAnim">FOUNDERS:</h1> : null}
+        </InView>
+        <InView onChange={(inView, entry) => {setShowFounders(inView)}} triggerOnce>
+          {showFounders ? <Founders /> : null}
+        </InView>
       </div>
     </div>
     </>
