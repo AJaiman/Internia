@@ -1,5 +1,5 @@
 import React from "react";
-import LoginSignUp from "./login";
+import LoginSignUp from "./loginSignupButton";
 import Searchbar from "./searchbar";
 
 export default function Navbar() {

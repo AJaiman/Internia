@@ -8,8 +8,8 @@ import FieldSelection  from "./components/field-selection/field-selection";
 import TypedText from "./components/typed-text";
 import { InView } from "react-intersection-observer";
 import Searchbar from "./components/navbar/searchbar";
-import LoginSignUp from "./components/navbar/login";
-import Founders from "./components/founders";
+import LoginSignUpButton from "./components/navbar/loginSignupButton";
+import Founders from "./components/founders/founders";
 
 export default function Home() {
   const [isExpanded, setIsExpanded]=useState(false);
@@ -56,12 +56,13 @@ export default function Home() {
         handleUnClick={handleUnClick}/>
             </div>
             <div className="flex items-center gap-2 ">
-                 <LoginSignUp />
+                 <LoginSignUpButton />
             </div>
-        </nav>
+      </nav>
         {isExpanded && (
         <div className="absolute left-0  inset-y-24 w-full h-screen backdrop-blur-xl z-10 "></div>
                       )}
+
         <div className="flex justify-between mt-[14vh] px-[7vw] ">
           <section className="flex flex-col gap-[1.5vh]">
             <div>
