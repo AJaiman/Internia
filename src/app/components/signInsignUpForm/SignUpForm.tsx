@@ -46,7 +46,7 @@ const SignUpForm = () => {
   });
 
   const onSubmit = async (values: z.infer<typeof FormSchema>) => {
-    const { toast } = useToast();
+    // const { toast } = useToast();
     const response = await fetch('api/user', {
       method: "POST",
       headers: {
@@ -62,12 +62,13 @@ const SignUpForm = () => {
     if (response.ok) {
       router.push("signInPage")
     } else {
-      toast ({
-        title: "Sign-up Error",
-        description: "Oops! Something went wrong.",
-        variant: "destructive",
-      });
-      // console.log("Error!")
+      // toast ({
+      //   title: "Sign-up Error",
+      //   description: "Oops! Something went wrong.",
+      //   variant: "destructive",
+      // });
+      console.log("Error!")
+
     }
 
   };
