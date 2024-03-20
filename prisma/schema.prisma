@@ -18,7 +18,7 @@ model User {
   email       String   @unique
   username    String   @unique
   password    String
-  preferences Json
+  preferences Json?
   createdAt   DateTime @default(now())
   updateAt    DateTime @updatedAt
 }

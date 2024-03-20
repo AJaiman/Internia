@@ -34,6 +34,7 @@ const FormSchema = z
   });
 
 const SignUpForm = () => {
+  const { toast } = useToast();
   const router = useRouter();
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
@@ -46,7 +47,6 @@ const SignUpForm = () => {
   });
 
   const onSubmit = async (values: z.infer<typeof FormSchema>) => {
-    // const { toast } = useToast();
     const response = await fetch('api/user', {
       method: "POST",
       headers: {
@@ -62,13 +62,12 @@ const SignUpForm = () => {
     if (response.ok) {
       router.push("signInPage")
     } else {
-      // toast ({
-      //   title: "Sign-up Error",
-      //   description: "Oops! Something went wrong.",
-      //   variant: "destructive",
-      // });
-      console.log("Error!")
-
+      toast({
+        title: "Sign-up Error",
+        description: "Oops! Your username or email has already been taken.",
+        variant: "destructive",
+      });
+      console.log("Error")
     }
 
   };

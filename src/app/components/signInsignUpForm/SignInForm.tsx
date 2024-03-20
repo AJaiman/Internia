@@ -51,6 +51,7 @@ const SignInForm = () => {
         description: "Oops! Your username or password is incorrect.",
         variant: "destructive",
       });
+      console.log('Error')
     } else {
       router.refresh();
       router.push("/dashboard");

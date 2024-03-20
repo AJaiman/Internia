@@ -40,7 +40,8 @@ export async function POST(req: Request) {
             data: {
                 username,
                 email,
-                password: hashedPassword
+                password: hashedPassword,
+                preferences: {}
             }
         })
         const { password: newUserPassword, ...rest } = newUser;
