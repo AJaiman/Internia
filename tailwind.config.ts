@@ -74,7 +74,13 @@ const config = {
       },
     },
   },
-  plugins: [require("tailwindcss-animate")],
+  daisyui: {
+    themes: [],
+ },
+  plugins: [
+    require("tailwindcss-animate"),
+    require('daisyui'),
+  ]
 } satisfies Config
 
 export default config
