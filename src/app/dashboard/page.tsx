@@ -7,7 +7,7 @@ const page = async () => {
   console.log(session);
   
   return (
-    <BottomHalfHomePage />
+    <></>
   )
 }
 
