@@ -34,13 +34,13 @@ export default function DashNav(props: dashProps) {
                             <Link href="/">Home</Link>
                         </li>
                         <li className="select-none px-4 border-r border-gray-500 hover:opacity-50 cursor-pointer font-sans">
-                            <Link href="/history">History</Link>
+                            <Link href="/dashboard/history">History</Link>
                         </li>
                         <li className="select-none px-4 border-r border-gray-500 hover:opacity-50 cursor-pointer font-sans">
-                            <Link href="/favorites">Favorites</Link>
+                            <Link href="/dashboard/favorites">Favorites</Link>
                         </li>
                         <li className="select-none px-4 border-r border-gray-500 hover:opacity-50 cursor-pointer flex items-center">
-                        <Link href="/notifications"><FaBell /></Link>
+                        <Link href="/dashboard/notifications"><FaBell /></Link>
                         </li>   
                     </ul>
                     <img src={props.pfp} alt="PFP" onClick={() => setShowPfpDropDown(!showPfpDropDown)} className="w-10 h-10 rounded-full cursor-pointer px-4" />
