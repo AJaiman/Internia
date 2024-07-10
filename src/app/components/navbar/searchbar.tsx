@@ -2,9 +2,9 @@
 import React, {useState} from "react";
 import { IoIosSearch } from "react-icons/io";
 type SearchProps = {
-    isExpanded: boolean;
-    handleClick: () => void;
-    handleUnClick: () => void;
+    isExpanded?: boolean;
+    handleClick?: () => void;
+    handleUnClick?: () => void;
   };
 export default function Searchbar({ isExpanded, handleClick, handleUnClick }: SearchProps) {
     return (
