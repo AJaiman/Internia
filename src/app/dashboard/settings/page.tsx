@@ -15,6 +15,16 @@ type settingProps = {
 export default function Page(props: settingProps) {
     const { email = "No email provided", password = "********", location = "No location provided" } = props;
     const [nightMode, setNightMode] = useState(false);
+    const [language, setLanguage] = useState("English");
+    const [showLanguages, setShowLanguages] = useState(false);
+
+    const languages = ["English", "Spanish", "French", "German", "Chinese", "Japanese", "Korean", "Russian", "Italian", "Portuguese"];
+
+    const toggleLanguages = () => setShowLanguages(!showLanguages);
+    const selectLanguage = (lang: string) => {
+        setLanguage(lang);
+        setShowLanguages(false);
+    };
 
     return (
         <>
@@ -73,10 +83,36 @@ export default function Page(props: settingProps) {
                                     <div className="block bg-gray-300 w-14 h-8 rounded-full peer-checked:bg-black"></div>
                                     <div className="dot absolute left-1 top-1 bg-white w-6 h-6 rounded-full transition peer-checked:translate-x-full peer-checked:bg-white"></div>
                                 </span>
-                                <span className="ml-3 text-lg font-medium text-gray-900">{nightMode ? "On" : "Off"}</span>
+                                <span className="ml-3 text-lg font-medium text-gray-600">{nightMode ? "On" : "Off"}</span>
                             </label>
                         </div>
-                        <p className="text-lg font-medium py-2">Language</p>
+                        <div className="flex justify-between items-center py-2">
+                            <p className="text-lg font-medium">Language</p>
+                            <div className="relative inline-block text-left pl-[30rem]">
+                                <button onClick={toggleLanguages} className="flex items-center bg-gray-200 px-4 py-2 rounded-md">
+                                    <span>{language}</span>
+                                    <svg className="ml-2 w-4 h-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
+                                    </svg>
+                                </button>
+                                {showLanguages && (
+                                    <div className="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5">
+                                        <div className="py-1" role="menu" aria-orientation="vertical" aria-labelledby="options-menu">
+                                            {languages.map((lang) => (
+                                                <button
+                                                    key={lang}
+                                                    onClick={() => selectLanguage(lang)}
+                                                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 w-full text-left"
+                                                    role="menuitem"
+                                                >
+                                                    {lang}
+                                                </button>
+                                            ))}
+                                        </div>
+                                    </div>
+                                )}
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <h2 className="text-2xl font-semibold absolute top-[41rem] left-6 z-20 pl-20">
@@ -84,7 +120,7 @@ export default function Page(props: settingProps) {
                 </h2>
                 <div className="absolute top-[44rem] left-6 z-20 pl-20">
                     <div className="flex flex-col divide-y-2 divide-gray-500 pl-4">
-                        <p className="text-lg font-medium py-2">Reset Recommendation Algorithm</p>
+                        <button className="text-left text-lg font-medium py-2 hover:text-gray-800 transition duration-200">Reset Recommendation Algorithm</button>
                         <button className="text-left text-lg font-medium py-2 text-red-500 hover:text-red-600 transition duration-200" onClick={() => signOut({ redirect: true, callbackUrl: `${window.location.origin}/signInPage`, })}>
                             Delete Account
                         </button>

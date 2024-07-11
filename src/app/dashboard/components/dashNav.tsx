@@ -43,7 +43,7 @@ export default function DashNav(props: dashProps) {
                         <Link href="/notifications"><FaBell /></Link>
                         </li>   
                     </ul>
-                    <img src={props.pfp} alt="PFP" onClick={() => setShowPfpDropDown(!showPfpDropDown)} className="w-10 h-10 rounded-full cursor-pointer px-4" />
+                    <img src={props.pfp} alt="PFP" onClick={() => setShowPfpDropDown(!showPfpDropDown)} className="w-14 h-14 rounded-full cursor-pointer px-4" />
                     {
                         showPfpDropDown ?
                             <div className="rounded-[10px] drop-shadow-md absolute top-[200%] left-[35%] w-[300px] h-fit bg-white">
