@@ -2,7 +2,7 @@ import { Bold } from "lucide-react";
 import React from "react";
 
 type CondensedProfCardProps = {
-    profId: string
+    profId: String
 }
 
 export default function CondensedProfCard(props: CondensedProfCardProps) {
@@ -21,7 +21,7 @@ export default function CondensedProfCard(props: CondensedProfCardProps) {
     fieldsText = fieldsText.slice(0, -2)
 
     return (
-        <span className="hover:drop-shadow-md transition duration-200 flex flex-row justify-between h-[8vh] items-center p-5 bg-orange-400 rounded-full">
+        <span className="hover:drop-shadow-md transition duration-200 flex flex-row justify-between h-[9vh] items-center p-5 bg-orange-400 rounded-full mb-10">
             <div className="flex flex-row gap-3 items-center">
                 <img src={pfp} alt="PFP" className="w-10 h-10 rounded-full cursor-pointer px-4" />
                 <div>
