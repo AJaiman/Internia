@@ -50,9 +50,12 @@ export default function HistoryPage() {
         </div>
         <div className="p-10">
             <div className="overflow-auto h-[72vh]">
-                {professorHistory.map(prof => (
-                    <CondensedProfCard profId={prof} />
-                ))}
+                {
+                    profFocus ?
+                    professorHistory.map(prof => (
+                        <CondensedProfCard profId={prof} />
+                    )) : <p>bruh</p>
+                }
             </div>
         </div>
         </>
