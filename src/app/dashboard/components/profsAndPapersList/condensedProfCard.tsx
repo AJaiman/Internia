@@ -21,7 +21,7 @@ export default function CondensedProfCard(props: CondensedProfCardProps) {
     fieldsText = fieldsText.slice(0, -2)
 
     return (
-        <span className="flex flex-row justify-between h-[8vh] items-center p-5 bg-orange-400 rounded-full">
+        <span className="hover:drop-shadow-md transition duration-200 flex flex-row justify-between h-[8vh] items-center p-5 bg-orange-400 rounded-full">
             <div className="flex flex-row gap-3 items-center">
                 <img src={pfp} alt="PFP" className="w-10 h-10 rounded-full cursor-pointer px-4" />
                 <div>
@@ -32,7 +32,7 @@ export default function CondensedProfCard(props: CondensedProfCardProps) {
             </div>
 
             <p className="w-1/4">{description}</p>
-            <button className="bg-[#D9D9D9] w-32 h-10 rounded-full text-xl">Connect</button>
+            <button className="bg-[#D9D9D9] drop-shadow-md active:drop-shadow-none w-32 h-10 rounded-full text-xl">Connect</button>
         </span>
     )
 }
