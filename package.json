@@ -3,10 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint": "next lint"
+    "dev": "cd frontend && npm run dev",
+    "backend": "cd backend && python3 -m uvicorn main:app --reload"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.3.4",
