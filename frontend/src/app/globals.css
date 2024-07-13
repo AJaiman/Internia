@@ -1,0 +1,105 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+    .trap1 {
+      width: screen;
+      height: 60vh;
+      clip-path: polygon(0% 0%, 100% 0%, 100% 50%, 0% 100%);
+      background-color: #F2E9D9;
+      border-radius: 20px;
+    }
+
+    .trap2 {
+      width: screen;
+      height: 150vh;
+      clip-path: polygon(0% 0%, 100% 0%, 100% 75%, 0% 100%);
+      background-color: #D5DAE2;
+      opacity: .2;
+      border-radius: 20px;
+    }
+
+    .trap3 {
+      width: screen;
+      height: 70vh;
+      clip-path: polygon(100% 0%, 100% 100%, 0% 100%, 0% 50%);
+      background-color: #F2E9D9;
+      border-radius: 20px;
+    }
+
+    .customWidth {
+        width: 35rem;
+    }
+
+    .fadeInAnim {
+      animation: fadeIn 2s;
+    }
+
+    .slideInAnim {
+      animation: slideIn 1s;
+    }
+
+    .founderSlideInAnim1 {
+      animation: foundersSlideIn 1s;
+    }
+    .founderSlideInAnim2 {
+      animation: foundersSlideIn 1300ms;
+    }
+    .founderSlideInAnim3 {
+      animation: foundersSlideIn 1600ms;
+    }
+    .founderSlideInAnim4 {
+      animation: foundersSlideIn 1900ms;
+    }
+
+    .foundersTitleSlideInAnim {
+      animation: foundersTitleSlideIn 1s;
+    }
+  }
+
+  body {
+    padding: 20px;
+  }
+
+  @keyframes fadeIn {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+
+  @keyframes slideIn {
+    0% {
+      translate: -50vw 0px;
+      opacity: 0;
+    }
+    100% {
+      translate: 0vw 0px;
+      opacity: 1;
+    }
+  }
+
+  @keyframes foundersSlideIn {
+    0% {
+      transform: translateX(-100vw);
+      filter: blur(5px);
+    }
+    100% {
+      transform: translateX(0);
+      filter: blur(0);
+    }
+  }
+
+  @keyframes foundersTitleSlideIn {
+    0% {
+      transform: translateX(100vw);
+      filter: blur(5px);
+    }
+    100% {
+      transform: translateX(0);
+      filter: blur(0);
+    }
+  }
