@@ -1,0 +1,6 @@
+{
+    "scripts": {
+        "dev": "cd frontend && npm run dev",
+        "backend": "cd backend && python3 -m uvicorn main:app --reload"
+    }
+}
