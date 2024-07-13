@@ -45,7 +45,7 @@ export default function HistoryPage() {
 
     return (
         <>
-        <DashNav pfp=""/>
+        <DashNav pfp="" showSearch={true}/>
         <div role="tablist" className="tabs mt-10 px-5">
             <input ref={profTab} type="radio" onFocus={handleProfFocus}  name="my_tabs_1" role="tab" className="tab focus:drop-shadow-lg border-b-4 border-slate focus:border-b-4 transition duration-200" aria-label="Professors" />
 
