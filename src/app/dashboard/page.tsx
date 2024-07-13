@@ -10,7 +10,7 @@ const page = async () => {
   
   return (
     <div className="space-y-10">
-        <DashboardNav pfp="" />
+        <DashboardNav pfp="/eric_sehaj.png" showSearch={true} />
         <TopHalfHomePage />
         <BottomHalfHomePage />
     </div>
