@@ -3,6 +3,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import DashNav from "../components/dashNav";
 import CondensedProfCard from "../components/profsAndPapersList/condensedProfCard";
+import CondensedPaperCard from "../components/profsAndPapersList/condensedPaperCard";
 
 export default function HistoryPage() {
 
@@ -39,6 +40,8 @@ export default function HistoryPage() {
     }, [profFocus, paperFocus])
 
     const professorHistory = ["Dr. Kefter-Oobleck", "Dr. Kefter-Oobleck", "Dr. Kefter-Oobleck", "Dr. Kefter-Oobleck", "Dr. Kefter-Oobleck", "Dr. Kefter-Oobleck", "Dr. Kefter-Oobleck", "Dr. Kefter-Oobleck"]
+    const paperHistory = ["Rizzology: The Study of Riss and its Effects on Human Nature", "Rizzology: The Study of Riss and its Effects on Human Nature", "Rizzology: The Study of Riss and its Effects on Human Nature", "Rizzology: The Study of Riss and its Effects on Human Nature", "Rizzology: The Study of Riss and its Effects on Human Nature", "Rizzology: The Study of Riss and its Effects on Human Nature"]
+
 
     return (
         <>
@@ -54,7 +57,11 @@ export default function HistoryPage() {
                     profFocus ?
                     professorHistory.map(prof => (
                         <CondensedProfCard profId={prof} />
-                    )) : <p>bruh</p>
+                    )) : 
+                    
+                    paperHistory.map(paper => (
+                        <CondensedPaperCard paperId={paper} />
+                    ))
                 }
             </div>
         </div>
