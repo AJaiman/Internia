@@ -1,11 +1,35 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import Link from "next/link";
 import SignUpLoginButton from "../components/signUpLoginButton";
 import SignUpLoginTextBox from "../components/signUpLoginTextBox";
 import Logo from "../components/logo";
+import { useSignUpContext } from "../SignUpContextProvider";
+import { useRouter } from "next/navigation";
 
 export default function LocationInformationPage() {
+    const signUpContext = useSignUpContext();
+    const router = useRouter();
+
+    const [country, setCountry] = useState('');
+    const [state, setState] = useState('');
+    const [city, setCity] = useState('');
+    const [preferredLanguage, setPreferredLanguage] = useState('');
+
+    /**
+     * save the location info and move to the next page
+     */
+    const handleSubmit = async () => {
+        signUpContext.setLocationInfoPageData({
+            country,
+            state,
+            city,
+            preferredLanguage
+        });
+        
+        router.push('/signUpPage/specificInfoPage');
+    }
+
     return (
         <div className="grid h-screen place-items-center">
             <Logo titleText="Hi Sigma, please enter your location!" />
@@ -13,22 +37,22 @@ export default function LocationInformationPage() {
                 <div className="flex flex-col gap-4">
                     <div className="flex flex-col">
                         <label htmlFor="country" className="text-sm text-gray-700">Country</label>
-                        <SignUpLoginTextBox id="country" placeholder="" />
+                        <SignUpLoginTextBox id="country" value={country} placeholder="" onChange={(e: any) => setCountry(e.target.value)} />
                     </div>
                     <div className="flex flex-col">
-                        <label htmlFor="password" className="text-sm text-gray-700">New Password</label>
-                        <SignUpLoginTextBox id="password" type="password" placeholder="" />
+                        <label htmlFor="state" className="text-sm text-gray-700">State</label>
+                        <SignUpLoginTextBox id="state" value={state} placeholder="" onChange={(e: any) => setState(e.target.value)} />
                     </div>
                     <div className="flex flex-col">
-                        <label htmlFor="fullName" className="text-sm text-gray-700">Full Name</label>
-                        <SignUpLoginTextBox id="fullName" placeholder="" />
+                        <label htmlFor="city" className="text-sm text-gray-700">City</label>
+                        <SignUpLoginTextBox id="city" value={city} placeholder="" onChange={(e: any) => setCity(e.target.value)} />
                     </div>
                     <div className="flex flex-col">
-                        <label htmlFor="phoneNumber" className="text-sm text-gray-700">Phone Number</label>
-                        <SignUpLoginTextBox id="phoneNumber" placeholder="" />
+                        <label htmlFor="preferredLanguage" className="text-sm text-gray-700">Preferred Language</label>
+                        <SignUpLoginTextBox id="preferredLanguage" value={preferredLanguage} placeholder="" onChange={(e: any) => setPreferredLanguage(e.target.value)} />
                     </div>
                     <Link href="/signUpPage/specificInfoPage">
-                        <SignUpLoginButton btnText="Next" />
+                        <SignUpLoginButton btnText="Next" onClick={handleSubmit} />
                     </Link>
                 </div>
             </div>
