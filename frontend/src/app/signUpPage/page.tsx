@@ -1,11 +1,15 @@
-import React from "react";
-import GeneralInfoPage from "./generalInfoPage/page";
-import LocationInfoPage from "./locationInfoPage/page";
-import SpecificInformationPage from "./specificInfoPage/page";
+"use client";
+
+import { useRouter } from 'next/navigation';
+import { useEffect } from "react";
 
 
-export default function GeneralInformationPage() {
-  return (
-      <></>
-  )
+export default function SignUpPage() {
+    const router = useRouter();
+    
+    useEffect(() => {
+        router.push('/signUpPage/generalInfoPage');
+    }, []);
+
+    return null;
 }
