@@ -2,7 +2,7 @@ import React from "react";
 
 type SignUpLoginButtonProps = {
     btnText: string;
-    onClick?: () => void;
+    onClick?: () => Promise<void>;
 }
 
 export default function SignUpLoginButton({ btnText, onClick }: SignUpLoginButtonProps) {

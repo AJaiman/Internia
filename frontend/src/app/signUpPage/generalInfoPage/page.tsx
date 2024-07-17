@@ -1,44 +1,35 @@
 'use client'
 
+import { useRouter } from 'next/navigation';
 import { useState } from 'react';
-import React from "react";
 import SignUpLoginButton from "../components/signUpLoginButton";
 import SignUpLoginTextBox from "../components/signUpLoginTextBox";
-import { MdOutlineCameraAlt } from "react-icons/md";
-import { useRouter } from 'next/navigation';
+import { useSignUpContext } from '../SignUpContextProvider';
 
 export default function GeneralInfoPage() {
     const router = useRouter();
+
+    const signUpContext = useSignUpContext();
+
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [name, setName] = useState('');
     const [phoneNumber, setPhoneNumber] = useState('');
-    const [message, setMessage] = useState('');
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
+    /**
+     * save the general info and move to the next page
+     */
+    const handleSubmit = async () => {
+        const intPhoneNumber = parseInt(phoneNumber);
+        signUpContext.setGeneralInfoPageData({
+            email,
+            password,
+            name,
+            phoneNumber: intPhoneNumber
+        });
 
-        try {
-            const response = await fetch('http://127.0.0.1:8000/sign-up', {
-                method: 'POST',
-                headers: {
-                'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ email, password, name, phoneNumber })
-            });
-
-                if (!response.ok) {
-                    const errorData = await response.json();
-                    throw new Error(errorData.detail || 'Unknown error');
-                } else {
-                    router.push('/signUpPage/locationInfoPage')
-                }
-
-                setMessage('User registered successfully!');
-            } catch (error) {
-                setMessage(`Error: ${error.message}`);
-            }
-    };
+        router.push('/signUpPage/locationInfoPage');
+    }
 
     const pushLogin = () => {
         router.push("/loginPage")
@@ -69,26 +60,27 @@ export default function GeneralInfoPage() {
                 <SignUpLoginTextBox 
                         placeholder="Email" 
                         value={email}
-                        onChange={(e) => setEmail(e.target.value)}
+                        onChange={(e: any) => setEmail(e.target.value)}
                     />
                     <SignUpLoginTextBox 
                         type="password" 
                         placeholder="New Password" 
                         value={password}
-                        onChange={(e) => setPassword(e.target.value)}
+                        onChange={(e: any) => setPassword(e.target.value)}
                     />
                     <SignUpLoginTextBox 
                         placeholder="Full Name" 
                         value={name}
-                        onChange={(e) => setName(e.target.value)}
+                        onChange={(e: any) => setName(e.target.value)}
                     />
                     <SignUpLoginTextBox 
                         placeholder="Phone Number" 
                         value={phoneNumber}
-                        onChange={(e) => setPhoneNumber(e.target.value)}
+                        onChange={(e: any) => setPhoneNumber(e.target.value)}
+                        numbersOnly
                     />
                     <SignUpLoginButton 
-                        btnText="Create Account" 
+                        btnText="Next" 
                         onClick={handleSubmit}
                     />
                 </div>
