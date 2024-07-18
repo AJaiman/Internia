@@ -1,0 +1,8 @@
+{
+    "scripts": {
+        "backend": "cd backend && python3 -m uvicorn main:app --reload",
+        "frontend dev": "cd frontend && npm run dev",
+        "frontend build": "cd frontend && npm run build",
+        "frontend start": "cd frontend && npm run start"
+    }
+}

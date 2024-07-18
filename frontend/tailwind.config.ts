@@ -19,6 +19,7 @@ const config = {
     },
     extend: {
       colors: {
+        customPink: '#F5B5B5',
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
@@ -74,7 +75,13 @@ const config = {
       },
     },
   },
-  plugins: [require("tailwindcss-animate")],
+  daisyui: {
+    themes: [],
+ },
+  plugins: [
+    require("tailwindcss-animate"),
+    require('daisyui'),
+  ]
 } satisfies Config
 
 export default config
