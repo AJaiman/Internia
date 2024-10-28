@@ -55,7 +55,7 @@ export default function EndorsementCloud() {
                 <EndorsementCard 
                     name="Arav Jaiman" 
                     description="Student at Poolesville High School" 
-                    quote='"I love internia but only because my daddy Aran loves internia."'
+                    quote='"Blah blah blah blah blah blah blah internia blah blah."'
                     pathToImage="/eric_sehaj.png"
                     sizeOfCard="xs"
                 />
