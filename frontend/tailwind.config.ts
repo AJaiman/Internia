@@ -20,6 +20,9 @@ const config = {
     extend: {
       colors: {
         customPink: '#F5B5B5',
+        royalPurple: '#220A3B',
+        mutedPurple: '#D2C0E3',
+        royalBlue: '#4755D3',
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",

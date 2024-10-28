@@ -1,24 +1,33 @@
-import { Inter } from "next/font/google";
+import type { Metadata } from "next";
+import { inter } from "@/app/ui/fonts";
+import { Analytics } from "@vercel/analytics/react"
 import "./globals.css";
-
-import { getServerSession } from "next-auth";
-import { authOptions } from "./api/auth/[...nextauth]/route";
-import Provider from "./client-provider";
+import Navbar from "@/app/ui/navbar";
 
 
-const inter = Inter({ subsets: ["latin"] });
+export const metadata: Metadata = {
+  title: "Internia",
+  description: "A website that connects high schoolers to internships based off the papers they like and don't like.",
+  metadataBase: new URL('https://localhost:3000'),  // Update later
+};
 
-export default async function RootLayout({
+export default function RootLayout({
   children,
-}: {
+}: Readonly<{
   children: React.ReactNode;
-}) {
-  const session = await getServerSession(authOptions);
-
+}>) {
   return (
     <html lang="en">
-      <body>
-        <Provider session={session}>{children}</Provider>
+      <head>
+        <link rel="icon" href="/icon.jpg" sizes="any" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+      </head>
+      <body
+        className={`${inter.className} antialiased flex flex-col items-center w-screen h-screen bg-gradient-to-b from-[#F2F4FB] via-[#E5D4F6]/[0.9] to[#F2F4FB]`}
+      >
+        <Analytics />
+        <Navbar />
+        {children}
       </body>
     </html>
   );
