@@ -1,3 +1,10 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.glow-text {
+    text-shadow: 0 0 5px rgba(71, 85, 211, 0.75),     /* Darker blue */
+    0 0 10px rgba(71, 85, 211, 0.5),    /* Fainter blue */
+    0 0 15px rgba(232, 121, 249, 0.5),  /* Lighter pink */
+    0 0 20px rgba(232, 121, 249, 0.75);
+}
