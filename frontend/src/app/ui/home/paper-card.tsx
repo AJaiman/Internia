@@ -17,7 +17,7 @@ export default function PaperCard({
                 <Icon className="text-royalPurple w-9 h-9" />
             </div>
             <h1 className="text-lg font-light">
-                <span className="font-medium">{label}: </span>
+                <span className="font-bold">{label}: </span>
                 {isLink ? <a href={description} className="underline hover:text-royalPurple/75">{description}</a> : description}
             </h1>
         </div>

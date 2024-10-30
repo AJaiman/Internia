@@ -85,7 +85,7 @@ Penatibus torquent eget nisi aenean habitant ridiculus diam. Dictum lorem erat h
                     <div className="flex flex-col items-start justify-center gap-2 pl-8 w-full h-1/2 bg-white/60 border border-royalPurple/25 rounded-[6px]">
                         <h1 className="text-xl text-royalPurple font-extrabold">Authors</h1>
                         <div className="w-full h-2/3 overflow-x-auto">
-                            <div className="flex flex-row flex-shrink-0 gap-6 w-[27vw] h-full overflow-x-scroll">
+                            <div className="flex flex-row flex-shrink-0 gap-6 w-[28vw] h-full overflow-x-scroll">
                                 {
                                     professors.map((professor, index) => <ProfessorCard key={index} professor={professor} pathToImage="/eric_sehaj.png" />)
                                 }

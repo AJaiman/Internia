@@ -4,6 +4,10 @@ import { useState } from "react";
 
 export default function Slider() {
     const [value, setValue] = useState(50);
+    const lowerBound = 
+        value < 15 ? value + 5 : 
+        value > 85 ? value - 5 :
+        value
 
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setValue(Number(event.target.value));
@@ -20,7 +24,7 @@ export default function Slider() {
                     onChange={handleChange}
                     className="w-full h-5 rounded-full appearance-none text-gray-200 bg-royalPurple focus:outline-none"
                     style={{
-                        background: `linear-gradient(to right, #220A3BBF ${value}%, #D2C0E3 ${value}%)`,
+                        background: `linear-gradient(to right, #220A3BBF ${lowerBound}%, #D2C0E3 ${lowerBound}%)`,
                     }}
                 />
                 {/* Display Value */}

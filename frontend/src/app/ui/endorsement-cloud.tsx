@@ -5,7 +5,7 @@ export default function EndorsementCloud() {
         <div className="relative w-[58%] h-[75vh] z-0">
             {/** Center card */}
             <div className="absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 w-96 h-72 -inset-3 bg-gradient-to-br from-royalBlue/80 to-fuchsia-400/80 blur-md z-0"></div>
-            <div className="absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 flex flex-col items-center justify-center gap-4 px-12 w-96 h-72 rounded-xl bg-white/80">
+            <div className="peer absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 flex flex-col items-center justify-center gap-4 px-12 w-96 h-72 rounded-xl bg-white/80">
                 <EndorsementCard 
                     name="Eric Huang" 
                     description="Student at Poolesville High School" 
