@@ -17,7 +17,7 @@ export default function ProfessorCard({ professor } : { professor: LongformProfe
                 <div className="flex flex-col items-start justify-around w-1/3 h-full">
                     <div>
                         <h1 className="font-black text-royalPurple text-5xl">{professor.name}</h1>
-                        <h1 className="text-royalPurple text-base">{professor.type}</h1>
+                        <h1 className="text-royalPurple text-lg">{professor.type}</h1>
                     </div>
                     <div>
                         <h1 className="font-light text-royalPurple text-base">Professor at the <span className="font-medium">{professor.fullUniversity}</span></h1>
@@ -30,6 +30,12 @@ export default function ProfessorCard({ professor } : { professor: LongformProfe
                     <ContactCard type={"Email"} contactInfo={"huange2007@gmail.com"} icon={EnvelopeIcon} />
                     <ContactCard type={"Phone Number"} contactInfo={"301-250-0553"} icon={PhoneIcon} />
                     <ContactCard type={"Link to University Profile"} contactInfo={"https://umd.edu/ioweruawioeruwoeiur"} icon={LinkIcon} isLink={true} />
+                </div>
+            </div>
+            <div className="flex flex-row items-center justify-end w-full h-2/3">
+                <div className="basis-2/5 h-3/4">
+                    <h1 className="text-lg text-royalPurple font-bold">Description</h1>
+                    <h1 className="text-lg text-royalPurple leading-loose">{ professor.description }</h1>
                 </div>
             </div>
         </div>

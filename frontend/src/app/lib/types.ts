@@ -7,5 +7,6 @@ export type Professor = {
 export type LongformProfessor = Professor & {
   fullUniversity: string,
   department: string,
-  type: string
+  type: string,
+  description: string
 }

@@ -14,8 +14,8 @@ export default function Navbar() {
                 <h1 className="font-bold text-4xl text-royalPurple">internia</h1>
             </div>
             <div className="flex flex-row items-center gap-8">
-                <Link href="/home" className={`text-royalPurple ${pathname == "/home" ? "font-bold" : ""}`}>
-                    Home
+                <Link href="/discover" className={`text-royalPurple ${pathname.includes("/discover") ? "font-bold" : ""}`}>
+                    Discover
                 </Link>
                 <Link href="/history" className={`text-royalPurple ${pathname == "/history" ? "font-bold" : ""}`}>
                     History
