@@ -3,3 +3,9 @@ export type Professor = {
     university: string,
     match: number
 }
+
+export type LongformProfessor = Professor & {
+  fullUniversity: string,
+  department: string,
+  type: string
+}

@@ -1,6 +1,6 @@
 import { Professor } from "@/app/lib/types";
 
-export default function ProfessorCard({ professor, pathToImage } : { professor: Professor, pathToImage: string}) {
+export default function AuthorCard({ professor, pathToImage } : { professor: Professor, pathToImage: string}) {
     return (
         <div 
           className="flex-shrink-0 w-1/3 h-[95%] bg-white rounded-[6px] bg-cover bg-center"

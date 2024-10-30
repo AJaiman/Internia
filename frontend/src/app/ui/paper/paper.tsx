@@ -1,10 +1,10 @@
 import { CalendarIcon, LinkIcon } from "@heroicons/react/24/solid"
-import PaperCard from "@/app/ui/home/paper-card"
-import AbstractCard from "@/app/ui/home/abstract-card"
-import PaperContent from "@/app/ui/home/paper-content"
+import PaperCard from "@/app/ui/paper/paper-card"
+import AbstractCard from "@/app/ui/paper/abstract-card"
+import PaperContent from "@/app/ui/paper/paper-content"
 import { Professor } from "@/app/lib/types"
-import ProfessorCard from "./professor-card"
-import Slider from "./slider"
+import ProfessorCard from "@/app/ui/paper/author-card"
+import Slider from "@/app/ui/paper/slider"
 
 export default function Paper({
     name,
