@@ -5,8 +5,10 @@ import { useState } from "react";
 export default function Slider() {
     const [value, setValue] = useState(50);
     const lowerBound = 
-        value < 15 ? value + 5 : 
-        value > 85 ? value - 5 :
+        value < 20 ? value + 5 : 
+        value >= 20 && value < 40 ? value + 3 :
+        value > 60 && value < 80 ? value - 3 :
+        value >= 80 ? value - 5 :
         value
 
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -22,7 +24,7 @@ export default function Slider() {
                     max="100"
                     value={value}
                     onChange={handleChange}
-                    className="w-full h-5 rounded-full appearance-none text-gray-200 bg-royalPurple focus:outline-none"
+                    className="w-full h-8 rounded-full appearance-none text-gray-200 bg-royalPurple focus:outline-none"
                     style={{
                         background: `linear-gradient(to right, #220A3BBF ${lowerBound}%, #D2C0E3 ${lowerBound}%)`,
                     }}
@@ -33,8 +35,8 @@ export default function Slider() {
             <style jsx>{`
                 input[type="range"]::-webkit-slider-thumb {
                     appearance: none;
-                    width: 24px;
-                    height: 24px;
+                    width: 32px;
+                    height: 32px;
                     background-color: #220A3B; /* Custom thumb color */
                     border-radius: 50%;
                     cursor: pointer;
