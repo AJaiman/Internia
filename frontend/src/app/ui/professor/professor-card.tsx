@@ -1,11 +1,30 @@
 import Image from "next/image";
-import { LongformProfessor } from "@/app/lib/types";
+import { LongformProfessor, Publication } from "@/app/lib/types";
 import ContactCard from "@/app/ui/professor/contact-card";
 import { EnvelopeIcon, LinkIcon, PhoneIcon } from "@heroicons/react/24/solid";
+import PublicationCard from "./publication-card";
 
 export default function ProfessorCard({ professor } : { professor: LongformProfessor}) {
+    const publications: Publication[] = [
+        {
+            name: "The Effect of Chipotle on the Obesity of Americans",
+            authors: [{name: "Shayaan Wadkar", match: 0.97, university: "UMD"}, {name: "Eric Huang", match: 0.97, university: "UMD"}, {name: "Arav Jaiman", match: 0.97, university: "UMD"}],
+            yearPublished: 2024
+        },
+        {
+            name: "The Effect of Chipotle on the Obesity of Americans",
+            authors: [{name: "Shayaan Wadkar", match: 0.97, university: "UMD"}, {name: "Eric Huang", match: 0.97, university: "UMD"}, {name: "Arav Jaiman", match: 0.97, university: "UMD"}],
+            yearPublished: 2024
+        },
+        {
+            name: "The Effect of Chipotle on the Obesity of Americans",
+            authors: [{name: "Shayaan Wadkar", match: 0.97, university: "UMD"}, {name: "Eric Huang", match: 0.97, university: "UMD"}, {name: "Arav Jaiman", match: 0.97, university: "UMD"}],
+            yearPublished: 2024
+        }
+    ]
+
     return (
-        <div className="self-center w-[93.75%] h-3/4 mt-4">
+        <div className="flex flex-col items-center justify-between self-center w-[93.75%] h-full mt-4">
             <div className="flex flex-row items-center gap-16 w-full h-1/3">
                 {/** Eventually, we're going to need to find a way to get the image of each professor */}
                 <Image 
@@ -32,10 +51,22 @@ export default function ProfessorCard({ professor } : { professor: LongformProfe
                     <ContactCard type={"Link to University Profile"} contactInfo={"https://umd.edu/ioweruawioeruwoeiur"} icon={LinkIcon} isLink={true} />
                 </div>
             </div>
-            <div className="flex flex-row items-center justify-end w-full h-2/3">
-                <div className="basis-2/5 h-3/4">
+            <div className="flex flex-row items-center justify-center gap-12 w-full h-2/3 mt-14">
+                <div className="flex flex-col justify-center p-5 basis-3/5 h-full bg-royalPurple/10 rounded-xl">
+                    <div className="h-[15%]">
+                        <h1 className="text-2xl text-royalPurple font-bold">Publications</h1>
+                    </div>
+                    <div className="flex flex-col gap-3 flex-1 overflow-y-auto">
+                        {
+                            publications.map((publication) => <PublicationCard key={publication.name} publication={publication}/>)
+                        }
+                    </div>
+                </div>
+                <div className="basis-2/5 h-full">
                     <h1 className="text-lg text-royalPurple font-bold">Description</h1>
-                    <h1 className="text-lg text-royalPurple leading-loose">{ professor.description }</h1>
+                    <div className="h-[95%] overflow-y-auto">
+                        <h1 className="text-lg text-royalPurple leading-[1.8]">{ professor.description }</h1>
+                    </div>
                 </div>
             </div>
         </div>

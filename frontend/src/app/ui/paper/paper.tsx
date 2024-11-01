@@ -81,7 +81,7 @@ Penatibus torquent eget nisi aenean habitant ridiculus diam. Dictum lorem erat h
 
                     `} />
                 </div>
-                <div className="basis-[47.5%] h-full">
+                <div className="flex flex-col items-center justify-between basis-[47.5%] h-full">
                     <div className="flex flex-col items-start justify-center gap-2 pl-8 w-full h-1/2 bg-white/60 border border-royalPurple/25 rounded-[6px]">
                         <h1 className="text-xl text-royalPurple font-extrabold">Authors</h1>
                         <div className="w-full h-2/3 overflow-x-auto">
@@ -92,21 +92,19 @@ Penatibus torquent eget nisi aenean habitant ridiculus diam. Dictum lorem erat h
                             </div>
                         </div>
                     </div>
-                    <div className="flex flex-col items-center justify-center w-full h-1/2">
-                        <div className="flex flex-row items-center justify-center gap-8 w-full h-1/2">
-                            <div className="w-1/2 space-y-2">
-                                <h1 className="text-xl text-royalPurple font-bold">Interest</h1>
-                                <Slider />
-                            </div>
-                            <div className="w-1/2 space-y-2">
-                                <h1 className="text-xl text-royalPurple font-bold">Readibility</h1>
-                                <Slider />
-                            </div>
+                    <div className="flex flex-row items-center justify-center gap-8 w-full">
+                        <div className="w-1/2 space-y-2">
+                            <h1 className="text-xl text-royalPurple font-bold">Interest</h1>
+                            <Slider />
                         </div>
-                        <div className="flex flex-row items-center gap-8 w-full h-1/3">
-                            <button className="bg-royalPurple/75 hover:bg-royalPurple/50 w-1/2 h-12 rounded-[6px] text-white font-bold">Skip</button>
-                            <button className="bg-royalPurple hover:bg-royalPurple/75 w-1/2 h-12 rounded-[6px] text-white font-bold">Confirm</button>
+                        <div className="w-1/2 space-y-2">
+                            <h1 className="text-xl text-royalPurple font-bold">Readibility</h1>
+                            <Slider />
                         </div>
+                    </div>
+                    <div className="flex flex-row items-center gap-8 w-full">
+                        <button className="bg-royalPurple/75 hover:bg-royalPurple/50 w-1/2 h-12 rounded-[6px] text-white font-bold">Skip</button>
+                        <button className="bg-royalPurple hover:bg-royalPurple/75 w-1/2 h-12 rounded-[6px] text-white font-bold">Confirm</button>
                     </div>
                 </div>
             </div>

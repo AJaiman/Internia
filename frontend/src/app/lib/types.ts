@@ -10,3 +10,9 @@ export type LongformProfessor = Professor & {
   type: string,
   description: string
 }
+
+export type Publication = {
+  name: string,
+  authors: Professor[],
+  yearPublished: number
+}
