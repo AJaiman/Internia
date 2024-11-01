@@ -62,7 +62,7 @@ Penatibus torquent eget nisi aenean habitant ridiculus diam. Dictum lorem erat h
     searchResults.sort((a, b) => a.match - b.match).reverse()
 
     return (
-        <div className="self-center w-[93.75%] flex flex-col -mt-4">
+        <div className="self-center w-[85%] flex flex-col -mt-4">
             <div className="flex flex-row h-8 gap-4">
                 <button 
                   className={`text-royalPurple px-2 ${tab == 'All' ? 'border-b-2 border-royalPurple font-bold' : ''}`}
@@ -80,7 +80,7 @@ Penatibus torquent eget nisi aenean habitant ridiculus diam. Dictum lorem erat h
                     Professors
                 </button>
             </div>
-            <div className="mt-4 h-[65vh] overflow-y-scroll">
+            <div className="mt-4 h-[65vh] overflow-y-scroll px-4">
                 {
                     searchResults.map((obj, index) => <div key={index} className="py-4">
                         {

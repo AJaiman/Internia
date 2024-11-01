@@ -9,7 +9,7 @@ export default function RecommendedPaper({ publication } : { publication: Longfo
         : publication.authors[0].name.split(/\s+/).slice(-1)[0] + " et al."
 
     return (
-        <Link href="/discover/paper/placeholder-url" className="relative flex-shrink-0 flex flex-row w-4/5 h-32 transition hover:translate-x-3">
+        <Link href="/discover/paper/placeholder-url" className="relative flex-shrink-0 flex flex-row w-full h-32 transition hover:translate-x-3">
             <div className="flex items-center justify-center w-32 h-32 bg-royalBlue/75 rounded-l-xl">
                 <NewspaperIcon className="w-16 h-16 text-royalPurple" />
             </div>
