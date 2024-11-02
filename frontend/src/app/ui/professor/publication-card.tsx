@@ -16,7 +16,7 @@ export default function PublicationCard({ publication } : { publication: Publica
                 <h1 className="text-xs text-royalPurple">{authors}</h1>
                 <h1 className="text-xs text-royalPurple">{publication.yearPublished}</h1>
             </div>
-            <Link href="/discover/paper/owueroiweur" className="group flex items-center justify-center w-20 h-20 rounded-r-[6px] bg-white/50 border border-royalPurple/30 border-l-0">
+            <Link href="/discover/paper/owueroiweur" className="group flex items-center justify-center w-20 h-20 rounded-r-[6px] bg-white/35 border border-royalPurple/30 border-l-0">
                 <ArrowRightIcon className="w-8 h-8 text-royalPurple transition group-hover:scale-125" />
             </Link>
         </div>
