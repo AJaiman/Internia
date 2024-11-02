@@ -24,7 +24,7 @@ export default function Slider() {
                     max="100"
                     value={value}
                     onChange={handleChange}
-                    className="w-full h-8 rounded-full appearance-none text-gray-200 bg-royalPurple focus:outline-none"
+                    className="w-full h-6 rounded-full appearance-none text-gray-200 bg-royalPurple focus:outline-none"
                     style={{
                         background: `linear-gradient(to right, #220A3BBF ${lowerBound}%, #D2C0E3 ${lowerBound}%)`,
                     }}
@@ -35,8 +35,8 @@ export default function Slider() {
             <style jsx>{`
                 input[type="range"]::-webkit-slider-thumb {
                     appearance: none;
-                    width: 32px;
-                    height: 32px;
+                    width: 28px;
+                    height: 28px;
                     background-color: #220A3B; /* Custom thumb color */
                     border-radius: 50%;
                     cursor: pointer;

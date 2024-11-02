@@ -23,7 +23,7 @@ export default function RootLayout({
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
       </head>
       <body
-        className={`${inter.className} antialiased flex flex-col items-center w-screen h-screen bg-gradient-to-b from-[#F2F4FB] via-[#E5D4F6]/[0.9] to[#F2F4FB]`}
+        className={`${inter.className} antialiased flex flex-col items-center w-screen h-screen bg-gradient-to-b from-[#E5D4F6]/[0.9] to[#F2F4FB]`}
       >
         <Analytics />
         <Navbar />
