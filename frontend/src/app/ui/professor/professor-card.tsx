@@ -2,7 +2,8 @@ import Image from "next/image";
 import { LongformProfessor, Publication } from "@/app/lib/types";
 import ContactCard from "@/app/ui/professor/contact-card";
 import { EnvelopeIcon, LinkIcon, PhoneIcon } from "@heroicons/react/24/solid";
-import PublicationCard from "./publication-card";
+import PublicationCard from "@/app/ui/professor/publication-card";
+import FavoritePill from "@/app/ui/favorite-pill";
 
 export default function ProfessorCard({ professor } : { professor: LongformProfessor}) {
     const publications: Publication[] = [
@@ -44,6 +45,7 @@ export default function ProfessorCard({ professor } : { professor: LongformProfe
                             Serves in the <span className="font-medium">Department of {professor.department}</span>
                         </h1>
                     </div>
+                    <FavoritePill />
                 </div>
                 <div className="flex flex-col justify-between w-1/3 h-full">
                     <ContactCard type={"Email"} contactInfo={"huange2007@gmail.com"} icon={EnvelopeIcon} />
