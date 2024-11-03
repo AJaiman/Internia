@@ -3,7 +3,7 @@ import { AcademicCapIcon, BookOpenIcon, BuildingLibraryIcon, StarIcon, UserIcon 
 import Link from "next/link";
 import FavoritePill from "@/app/ui/favorite-pill";
 
-export default function RecommendedProfessor({ professor, addFavoriteButton = false } : { professor: LongformProfessor, addFavoriteButton?: boolean }) {
+export default function RecommendedProfessor({ professor, addFavoriteButton = false, isFavorited = false } : { professor: LongformProfessor, addFavoriteButton?: boolean, isFavorited?: boolean }) {
     const truncatedDescription = professor.description.split(/\s+/).slice(0, 30).join(" ") + "..."
 
     // Hacky way to alternate the two components depending on whether or not there's a favorite button
@@ -41,7 +41,7 @@ export default function RecommendedProfessor({ professor, addFavoriteButton = fa
                         <BookOpenIcon className="text-royalPurple/75 w-4 h-4" />
                         <h1 className="text-xs text-royalPurple font-light">In Dept. of <span className="font-medium">{professor.department}</span></h1>
                     </div>
-                    { addFavoriteButton ? <FavoritePill /> : <></>}
+                    { addFavoriteButton ? <FavoritePill initialState={isFavorited} /> : <></>}
                 </div>
             </div>
         </MainComponent>

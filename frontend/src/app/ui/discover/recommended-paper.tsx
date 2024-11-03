@@ -3,7 +3,7 @@ import Link from "next/link";
 import { LongformPublication } from "@/app/lib/types";
 import FavoritePill from "@/app/ui/favorite-pill";
 
-export default function RecommendedPaper({ publication, addFavoriteButton = false } : { publication: LongformPublication, addFavoriteButton?: boolean }) {
+export default function RecommendedPaper({ publication, addFavoriteButton = false, isFavorited = false } : { publication: LongformPublication, addFavoriteButton?: boolean, isFavorited?: boolean }) {
     const truncatedAbstract = publication.abstract.split(/\s+/).slice(0, 30).join(" ") + "..."
     const truncatedAuthors = publication.authors.length <= 3 ? 
         publication.authors.map((author) => author.name.split(/\s+/).slice(-1)[0]).join(", ")
@@ -43,7 +43,7 @@ export default function RecommendedPaper({ publication, addFavoriteButton = fals
                         <UserIcon className="text-royalPurple/75 w-4 h-4" />
                         <h1 className="text-xs text-royalPurple font-light">Authored by <span className="font-medium">{truncatedAuthors}</span></h1>
                     </div>
-                    { addFavoriteButton ? <FavoritePill /> : <></>}
+                    { addFavoriteButton ? <FavoritePill initialState={isFavorited} /> : <></>}
                 </div>
             </div>
         </MainComponent>

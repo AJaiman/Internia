@@ -3,8 +3,8 @@
 import { BookmarkIcon } from "@heroicons/react/24/solid";
 import { useState } from "react"
 
-export default function FavoritePill() {
-    const [isFavorited, setFavorited] = useState(false);
+export default function FavoritePill({ initialState = false } : { initialState?: boolean }) {
+    const [isFavorited, setFavorited] = useState(initialState);
 
     return (
         <button 
