@@ -12,7 +12,7 @@ export default function Page() {
                         Finding internships has never been easier. With Internia, you'll be <span className="font-medium">recommended professors</span> based on your 
                         interests after <span className="font-medium">reading and rating internship papers</span> based off your interest towards them. 
                     </p>
-                    <Link href="/signup" className="group flex items-center justify-center gap-2 bg-royalBlue hover:bg-blue-600 rounded-xl w-[22rem] h-12 font-bold text-white">
+                    <Link href="/sign-in" className="group flex items-center justify-center gap-2 bg-royalBlue hover:bg-blue-600 rounded-xl w-[22rem] h-12 font-bold text-white">
                         <p className="text-lg">Get Started</p>
                         <ArrowRightIcon className="w-5 h-5 transition group-hover:translate-x-1" />
                     </Link>
