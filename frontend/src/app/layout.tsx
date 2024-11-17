@@ -3,6 +3,8 @@ import { inter } from "@/app/ui/fonts";
 import { Analytics } from "@vercel/analytics/react"
 import "./globals.css";
 import Navbar from "@/app/ui/navbar";
+import Provider from "@/app/client-provider";
+import { getServerSession } from "next-auth";
 
 
 export const metadata: Metadata = {
@@ -11,11 +13,13 @@ export const metadata: Metadata = {
   metadataBase: new URL('https://localhost:3000'),  // Update later
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const session = await getServerSession();
+
   return (
     <html lang="en">
       <head>
@@ -26,8 +30,10 @@ export default function RootLayout({
         className={`${inter.className} antialiased flex flex-col items-center w-screen h-screen bg-gradient-to-b from-[#E5D4F6]/[0.9] to[#F2F4FB]`}
       >
         <Analytics />
-        <Navbar />
-        {children}
+        <Provider session={session}>
+          <Navbar />
+          {children}
+        </Provider>
       </body>
     </html>
   );
