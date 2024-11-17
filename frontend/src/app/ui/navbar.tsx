@@ -12,10 +12,12 @@ export default function Navbar() {
 
     return (
         <div className="flex flex-row items-center justify-between w-screen h-auto px-12 py-6">
-            <div className="flex flex-row items-center gap-3">
-                <AcademicCapIcon className="w-8 h-8" />
-                <h1 className="font-bold text-4xl text-royalPurple">internia</h1>
-            </div>
+            <Link href="/">
+                <div className="flex flex-row items-center gap-3">
+                    <AcademicCapIcon className="w-8 h-8" />
+                    <h1 className="font-bold text-4xl text-royalPurple">internia</h1>
+                </div>
+            </Link>
             {
                 session != null ? (
                     <div className="flex flex-row items-center gap-8">
