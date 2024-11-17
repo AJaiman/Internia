@@ -1,7 +1,13 @@
+"use client"
+
 import EndorsementCloud from "@/app/ui/endorsement-cloud";
 import SignInButton from "@/app/ui/sign-in-button";
+import { useSession } from "next-auth/react";
 
 export default function Page() {
+
+    const {data: session} = useSession()
+
     return (
         <div className="flex flex-col justify-center w-full h-full px-24">
             <div className="flex flex-row items-center justify-between w-full">
@@ -11,7 +17,9 @@ export default function Page() {
                         Finding internships has never been easier. With Internia, you'll be <span className="font-medium">recommended professors</span> based on your 
                         interests after <span className="font-medium">reading and rating internship papers</span> based off your interest towards them. 
                     </p>
-                    <SignInButton />
+                    {session ? 
+                    <></> : <SignInButton />
+                    }
                 </div>
                 <EndorsementCloud />
             </div>
