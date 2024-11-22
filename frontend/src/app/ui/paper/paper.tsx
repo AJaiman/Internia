@@ -53,21 +53,9 @@ export default function Paper({
                                 }
                             </div>
                         </div>
-                    </div>
-                    <div className="flex flex-row items-center justify-center gap-8 w-full">
-                        <div className="w-1/2 space-y-2">
-                            <h1 className="text-xl text-royalPurple font-bold">Interest</h1>
-                            <Slider />
-                        </div>
-                        <div className="w-1/2 space-y-2">
-                            <h1 className="text-xl text-royalPurple font-bold">Readibility</h1>
-                            <Slider />
-                        </div>
-                    </div>
-                    <div className="flex flex-row items-center gap-8 w-full">
-                        <button className="bg-royalPurple/75 hover:bg-royalPurple/50 w-1/2 h-12 rounded-[6px] text-white font-bold">Skip</button>
-                        <button className="bg-royalPurple hover:bg-royalPurple/75 w-1/2 h-12 rounded-[6px] text-white font-bold">Confirm</button>
-                    </div>
+                    </div>  
+                    <button className="bg-royalPurple/75 hover:bg-royalPurple/50 w-full h-12 rounded-[6px] text-white font-bold">Good</button>
+                    <button className="bg-royalPurple hover:bg-royalPurple/75 w-full h-12 rounded-[6px] text-white font-bold">Bad</button>
                 </div>
             </div>
         </div>
