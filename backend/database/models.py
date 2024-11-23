@@ -1,5 +1,6 @@
 from pydantic import BaseModel
 
+# User Models
 class User(BaseModel):
     first_name: str
     last_name: str
@@ -14,12 +15,14 @@ class NewUser(BaseModel):
     last_name: str
     email: str
 
+# Research Paper Models
 class ResearchPaper(BaseModel):
     title: str
     abstract: str
     tags: list[str]
     semantic_scholar_id: str
 
+# Researcher Models
 class Researcher(BaseModel):
     first_name: str
     last_name: str
