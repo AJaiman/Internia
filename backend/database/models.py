@@ -16,6 +16,13 @@ class NewUser(BaseModel):
     last_name: str
     email: str
 
+class UpdateUser(BaseModel):
+    email: str
+    positive_papers: list[str]
+    negative_papers: list[str]
+    saved_papers: list[str]
+    saved_researchers: list[str]
+
 # Research Paper Models
 class ResearchPaper(BaseModel):
     title: str

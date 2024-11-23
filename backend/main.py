@@ -57,17 +57,17 @@ async def delete_user(user_id: str):
     return {"message": "User deleted successfully"}
 
 @router.patch("/user")
-async def update_user(user_email: str, positive_papers: list[str], negative_papers: list[str], saved_papers: list[str], saved_researchers: list[str]):
-    user = users_collection.find_one({"email": user_email})
+async def update_user(update_user: UpdateUser):
+    user = users_collection.find_one({"email": update_user.email})
     if not user:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="User not found")
     
-    liked_papers = list(user["liked_papers"]) + positive_papers
-    disliked_papers = list(user["disliked_papers"]) + negative_papers
-    saved_papers = list(user["saved_papers"]) + saved_papers
-    saved_researchers = list(user["saved_researchers"]) + saved_researchers
+    liked_papers = list(user["liked_papers"]) + update_user.positive_papers
+    disliked_papers = list(user["disliked_papers"]) + update_user.negative_papers
+    saved_papers = list(user["saved_papers"]) + update_user.saved_papers
+    saved_researchers = list(user["saved_researchers"]) + update_user.saved_researchers
 
-    users_collection.update_one({"email": user_email}, {"$set": {"liked_papers": liked_papers, "disliked_papers": disliked_papers, "saved_papers": saved_papers, "saved_researchers": saved_researchers}})
+    users_collection.update_one({"email": update_user.email}, {"$set": {"liked_papers": liked_papers, "disliked_papers": disliked_papers, "saved_papers": saved_papers, "saved_researchers": saved_researchers}})
     return {"message": "User updated successfully"}
 
 
