@@ -21,6 +21,9 @@ export default function Navbar() {
             {
                 session != null ? (
                     <div className="flex flex-row items-center gap-8">
+                        <Link href="/dashboard" className={`text-royalPurple ${pathname.includes("/dashboard") ? "font-bold" : ""}`}>
+                            Dashboard
+                        </Link>
                         <Link href="/discover" className={`text-royalPurple ${pathname.includes("/discover") ? "font-bold" : ""}`}>
                             Discover
                         </Link>
