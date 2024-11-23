@@ -19,9 +19,7 @@ export const authOptions: AuthOptions = {
       if (!user || !user.name || !user.email) {
         return false;
       }
-      const firstname = "John";
-      const lastname = "Doe";
-      const email = "john.doe@example.com";
+      
       try {
         const response = await fetch('http://localhost:8000/user', {
           method: "POST",

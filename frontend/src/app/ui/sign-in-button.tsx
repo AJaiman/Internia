@@ -6,7 +6,7 @@ export default function SignInButton() {
   return (
     <button
       className="flex w-full items-center justify-center gap-5 rounded-xl bg-white px-4 py-4 text-sm font-bold drop-shadow-md hover:bg-gray-50 border border-royalPurple/25"
-      onClick={() => signIn('google', { callbackUrl: 'http://localhost:3000/discover' })}
+      onClick={() => signIn('google', { callbackUrl: 'http://localhost:3000/dashboard' })}
     >
       <GoogleLogo />
       <p className="text-lg">Sign in with Google</p>
