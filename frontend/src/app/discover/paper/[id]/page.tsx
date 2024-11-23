@@ -1,4 +1,4 @@
-import Paper from "@/app/ui/paper/paper";
+import IndividualPaper from "@/app/ui/paper/individual-paper";
 
 export default async function Page(props: { params: Promise<{ id: string }> }) {
     const params = await props.params;
@@ -8,7 +8,7 @@ export default async function Page(props: { params: Promise<{ id: string }> }) {
 
     return (
         <>
-            <Paper
+            <IndividualPaper
                 publication={{
                     name: "Effect of Chipotle on Obesity in the United States",
                     authors: [{name: "Eric Huang", match: 0.97, university: "UMD"}, {name: "Eric Huang", match: 0.9, university: "UMD"}, {name: "Eric Huang", match: 0.82, university: "UMD"}],
@@ -28,7 +28,7 @@ Penatibus torquent eget nisi aenean habitant ridiculus diam. Dictum lorem erat h
                     `,
                     match: 0.98
                 }}
-                isRecommended={isRecommendingPaper} />
+                isRecommended={false} />
         </>
     )
 }
