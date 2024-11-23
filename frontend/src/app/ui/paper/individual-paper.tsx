@@ -4,7 +4,6 @@ import AbstractCard from "@/app/ui/paper/abstract-card"
 import PaperContent from "@/app/ui/paper/paper-content"
 import { LongformPublication } from "@/app/lib/types"
 import ProfessorCard from "@/app/ui/paper/author-card"
-import Slider from "@/app/ui/paper/slider"
 
 export default function IndividualPaper({
     publication,
