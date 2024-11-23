@@ -13,3 +13,8 @@ uri = f"mongodb+srv://aravjaiman:{mongo_password}@internia.gqvo0.mongodb.net/?re
 # Create a new client and connect to the server
 client = MongoClient(uri, server_api=ServerApi('1'))
 
+db = client.internia_db
+
+users_collection = db["users"]
+researchers_collection = db["researchers"]
+research_papers_collection = db["research_papers"]
