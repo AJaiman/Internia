@@ -13,7 +13,33 @@ export const authOptions: AuthOptions = {
         }
       }
     }),
-  ]
+  ],
+  callbacks: {
+    async signIn({ user }) {
+      if (!user || !user.name || !user.email) {
+        return false;
+      }
+      const firstname = "John";
+      const lastname = "Doe";
+      const email = "john.doe@example.com";
+      try {
+        const response = await fetch('http://localhost:8000/user', {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({first_name: user.name.split(" ")[0], last_name: user.name.split(" ")[1], email: user.email}),
+        });
+        return response.ok;
+      } catch (error) {
+        console.error('Error during user creation:', error);
+        return false;
+      }
+    }
+  },
+  pages: {
+    error: '/',    // Redirect to home page on error
+  },
 };
 
 const handler = NextAuth(authOptions);

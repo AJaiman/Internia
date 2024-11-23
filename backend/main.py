@@ -2,26 +2,33 @@ from fastapi import FastAPI, APIRouter, HTTPException, status
 from database.models import *
 from config import users_collection, researchers_collection, research_papers_collection
 from database.schemas import *
+from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI()
+
+# Add CORS middleware
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://localhost:3000"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
 router = APIRouter()
 
 @router.post("/user")
-async def create_user(
-    first_name: str,
-    last_name: str,
-    email: str,
-):
+async def create_user(new_user: NewUser):
     # Check if user already exists
-    existing_user = users_collection.find_one({"email": email})
+    existing_user = users_collection.find_one({"email": new_user.email})
     if existing_user:
         return {"message": "User already exists", "status_code": 400}
     
     # Create new user
     new_user = User(
-        first_name=first_name,
-        last_name=last_name,
-        email=email,
+        first_name=new_user.first_name,
+        last_name=new_user.last_name,
+        email=new_user.email,
         tags=[],
         liked_papers=[],
         disliked_papers=[],

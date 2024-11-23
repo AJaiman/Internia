@@ -9,6 +9,11 @@ class User(BaseModel):
     disliked_papers: list[str]
     saved_papers: list[str]
 
+class NewUser(BaseModel):
+    first_name: str
+    last_name: str
+    email: str
+
 class ResearchPaper(BaseModel):
     title: str
     abstract: str
