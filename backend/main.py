@@ -1,3 +1,4 @@
+from bson import ObjectId
 from fastapi import FastAPI, APIRouter, HTTPException, status
 from database.models import *
 from config import users_collection, researchers_collection, research_papers_collection
@@ -32,7 +33,8 @@ async def create_user(new_user: NewUser):
         tags=[],
         liked_papers=[],
         disliked_papers=[],
-        saved_papers=[]
+        saved_papers=[],
+        saved_researchers=[]
     )
 
     # Add to DB
@@ -47,6 +49,27 @@ async def get_users():
     users = users_collection.find()
     return {"users": all_users(users)}
 
+@router.delete("/user")
+async def delete_user(user_id: str):
+    result = users_collection.delete_one({"_id": ObjectId(user_id)})
+    if result.deleted_count == 0:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="User not found")
+    return {"message": "User deleted successfully"}
+
+@router.patch("/user")
+async def update_user(user_email: str, positive_papers: list[str], negative_papers: list[str], saved_papers: list[str], saved_researchers: list[str]):
+    user = users_collection.find_one({"email": user_email})
+    if not user:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="User not found")
     
+    liked_papers = list(user["liked_papers"]) + positive_papers
+    disliked_papers = list(user["disliked_papers"]) + negative_papers
+    saved_papers = list(user["saved_papers"]) + saved_papers
+    saved_researchers = list(user["saved_researchers"]) + saved_researchers
+
+    users_collection.update_one({"email": user_email}, {"$set": {"liked_papers": liked_papers, "disliked_papers": disliked_papers, "saved_papers": saved_papers, "saved_researchers": saved_researchers}})
+    return {"message": "User updated successfully"}
+
+
 
 app.include_router(router)
