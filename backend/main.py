@@ -1,5 +1,6 @@
 from bson import ObjectId
 from fastapi import FastAPI, APIRouter, HTTPException, status
+from papers import *
 from database.models import *
 from config import users_collection, researchers_collection, research_papers_collection
 from database.schemas import *
@@ -70,6 +71,15 @@ async def update_user(update_user: UpdateUser):
     users_collection.update_one({"email": update_user.email}, {"$set": {"liked_papers": liked_papers, "disliked_papers": disliked_papers, "saved_papers": saved_papers, "saved_researchers": saved_researchers}})
     return {"message": "User updated successfully"}
 
-
+@router.get("/user/saved-papers/{email}")
+async def get_saved_papers(email: str):
+    user = users_collection.find_one({"email": email})
+    if not user:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="User not found")
+    
+    saved_papers = list(user["saved_papers"])
+    paper_details = get_paper_batch_info(saved_papers)
+    
+    return {"papers": paper_details}
 
 app.include_router(router)

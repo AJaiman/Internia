@@ -5,9 +5,15 @@ import Paginator from "@/app/ui/paginator"
 import RecommendedPaper from "@/app/ui/discover/recommended-paper"
 import RecommendedProfessor from "@/app/ui/discover/recommended-professor"
 import { LongformProfessor, LongformPublication } from "@/app/lib/types"
+import { useSession } from "next-auth/react"
 
 export default function Page() {
     const [tab, setTab] = useState<"Papers" | "Professors">("Papers")
+    const [savedPapers, setSavedPapers] = useState<LongformPublication[]>([])
+    const [isLoading, setIsLoading] = useState(true)
+    const {data: session} = useSession()
+
+    
 
     // Placeholder that should be filled in later
     const viewedPaper: LongformPublication =
