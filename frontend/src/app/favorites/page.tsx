@@ -18,6 +18,7 @@ export default function Page() {
         if (session?.user?.email) {
             try {
                 const response = await fetch(`http://localhost:8000/user/saved-papers/${session.user.email}`)
+                console.log(response)
                 if (response.ok) {
                     const data = await response.json()
                     const papers = data.papers
@@ -63,6 +64,31 @@ export default function Page() {
 
     if (isLoading) {
         return <div>Loading...</div>
+    }
+
+    // Add check for empty states
+    const currentItems = tab === 'Papers' ? savedPapers : viewedProfessors
+    if (currentItems.length === 0) {
+        return (
+            <div className="self-center flex flex-col w-[70.3%] gap-4 h-full mt-8">
+                <h1 className="font-black text-4xl text-royalPurple">Recently Favorited</h1>
+                <div className="flex flex-row h-10 gap-4">
+                    <button 
+                      className={`text-lg text-royalPurple px-6 ${tab == 'Papers' ? 'border-b-2 border-royalPurple font-bold' : ''}`}
+                      onClick={() => setTab("Papers")}>
+                        Papers ({ savedPapers.length })
+                    </button>
+                    <button 
+                      className={`text-lg text-royalPurple px-6 ${tab == 'Professors' ? 'border-b-2 border-royalPurple font-bold' : ''}`}
+                      onClick={() => setTab("Professors")}>
+                        Professors ({ viewedProfessors.length })
+                    </button>
+                </div>
+                <div className="mt-8 text-center text-gray-500">
+                    No {tab.toLowerCase()} have been favorited yet.
+                </div>
+            </div>
+        )
     }
 
     return (
