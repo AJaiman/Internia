@@ -62,13 +62,8 @@ async def update_user(update_user: UpdateUser):
     user = users_collection.find_one({"email": update_user.email})
     if not user:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="User not found")
-    
-    liked_papers = list(user["liked_papers"]) + update_user.positive_papers
-    disliked_papers = list(user["disliked_papers"]) + update_user.negative_papers
-    saved_papers = list(user["saved_papers"]) + update_user.saved_papers
-    saved_researchers = list(user["saved_researchers"]) + update_user.saved_researchers
 
-    users_collection.update_one({"email": update_user.email}, {"$set": {"liked_papers": liked_papers, "disliked_papers": disliked_papers, "saved_papers": saved_papers, "saved_researchers": saved_researchers}})
+    users_collection.update_one({"email": str(update_user.email)}, {"$set": {"liked_papers": list(update_user.positive_papers) , "disliked_papers": list(update_user.negative_papers), "saved_papers": list(update_user.saved_papers), "saved_researchers": list(update_user.saved_researchers)}})
     return {"message": "User updated successfully"}
 
 @router.get("/user/saved-papers/{email}")

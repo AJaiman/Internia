@@ -15,7 +15,7 @@ def get_paper_info(paper_id: str):
         return response.json()
 
 def get_paper_batch_info(paper_ids: list[str]):
-    queryParams = {"fields": "title,abstract,authors,isOpenAccess,openAccessPdf"}
+    queryParams = {"fields": "title,abstract,authors,isOpenAccess,openAccessPdf,year,externalIds,publicationDate"}
     response = requests.post(paper_batch_info_url, json={"ids": paper_ids}, params=queryParams)
     if response.status_code != 200:
         print(f"Error getting paper batch info: {response.status_code}")
