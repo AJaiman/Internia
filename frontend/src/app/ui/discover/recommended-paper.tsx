@@ -14,13 +14,13 @@ export default function RecommendedPaper({ publication, addFavoriteButton = fals
     const SecondaryComponent = addFavoriteButton ? Link : "h1"
 
     return (
-        <MainComponent href="/discover/paper/placeholder-url" className={`relative flex-shrink-0 flex flex-row w-full h-32 transition ${addFavoriteButton ? '' : 'hover:translate-x-3'}`}>
+        <MainComponent href={`/discover/paper/${publication.id}`} className={`relative flex-shrink-0 flex flex-row w-full h-32 transition ${addFavoriteButton ? '' : 'hover:translate-x-3'}`}>
             <div className="flex items-center justify-center w-32 h-32 bg-royalBlue/75 rounded-l-xl">
                 <NewspaperIcon className="w-16 h-16 text-royalPurple" />
             </div>
             <div className="flex flex-col flex-1 justify-around py-1 pl-8 h-full bg-royalBlue/20 rounded-r-xl">
                 <div>
-                    <SecondaryComponent href="/discover/paper/placeholder-url" className={`text-lg text-royalPurple font-bold ${addFavoriteButton ? 'hover:underline hover:text-royalBlue' : ''}`}>
+                    <SecondaryComponent href={`/discover/paper/${publication.id}`} className={`text-lg text-royalPurple font-bold ${addFavoriteButton ? 'hover:underline hover:text-royalBlue' : ''}`}>
                         {publication.name}
                     </SecondaryComponent>
                     <div className="w-4/5">

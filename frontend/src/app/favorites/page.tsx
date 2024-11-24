@@ -31,7 +31,8 @@ export default function Page() {
                             content: paper.openAcccessPdf?.url,
                             fullDate: paper.publicationDate,
                             link: paper.externalIds?.DOI,
-                            match: 0.99
+                            match: 0.99,
+                            id: paper.paperId
                         }
                     })
                     setSavedPapers(transformedPapers)

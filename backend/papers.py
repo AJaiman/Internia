@@ -7,7 +7,7 @@ paper_recommendations_url = "http://api.semanticscholar.org/recommendations/v1/p
 # api_key = "1234567890" TODO: get api key
 
 def get_paper_info(paper_id: str):
-    queryParams = {"fields": "title,abstract,authors,isOpenAccess,openAccessPdf"}
+    queryParams = {"fields": "title,abstract,authors,isOpenAccess,openAccessPdf,year,externalIds,publicationDate"}
     response = requests.get(paper_info_url + paper_id, params=queryParams)
     if response.status_code != 200:
         print(f"Error getting paper info: {response.status_code}")

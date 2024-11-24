@@ -6,6 +6,8 @@ from config import users_collection, researchers_collection, research_papers_col
 from database.schemas import *
 from fastapi.middleware.cors import CORSMiddleware
 
+# Paper IDs to test with: "649def34f8be52c8b66281af98ae884c09aef38b", "23ffaa0fe06eae05817f527a47ac3291077f9e58"
+
 app = FastAPI()
 
 # Add CORS middleware
@@ -19,6 +21,7 @@ app.add_middleware(
 
 router = APIRouter()
 
+# User Routes
 @router.post("/user")
 async def create_user(new_user: NewUser):
     # Check if user already exists
@@ -76,5 +79,11 @@ async def get_saved_papers(email: str):
     paper_details = get_paper_batch_info(saved_papers)
     
     return {"papers": paper_details}
+
+# Paper Routes
+@router.get("/paper/{paper_id}")
+async def get_paper(paper_id: str):
+    paper_details = get_paper_info(paper_id)
+    return paper_details
 
 app.include_router(router)

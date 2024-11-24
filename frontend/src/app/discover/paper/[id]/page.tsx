@@ -1,23 +1,78 @@
-import IndividualPaper from "@/app/ui/paper/individual-paper";
+'use client'
 
-export default async function Page(props: { params: Promise<{ id: string }> }) {
-    const params = await props.params;
-    const id = params.id;
+import { LongformPublication } from "@/app/lib/types";
+import IndividualPaper from "@/app/ui/paper/individual-paper";
+import { useEffect, useState } from "react";
+
+export default function Page(props: { params: { id: string } }) {
+    const id = props.params.id;
+    const [isLoading, setIsLoading] = useState(true)
+    const [publication, setPublication] = useState<LongformPublication>()
     
-    const isRecommendingPaper = true;  // Change later
+    // Fetch Paper Info
+    useEffect(() => {
+        const fetchPaper = async () => {
+            try {
+                const response = await fetch(`http://localhost:8000/paper/${id}`)
+                if (response.ok) {
+                    const paper = await response.json()
+                    console.log(paper)
+                    
+                    // Check if paper exists and has required fields
+                    if (!paper || !paper.title) {
+                        console.error("Invalid paper data received:", paper)
+                        setIsLoading(false)
+                        return
+                    }
+
+                    const transformedPaper = {
+                        name: paper.title,
+                        authors: paper.authors?.map((author: any) => ({
+                            name: author.name || 'Unknown Author',
+                            university: "UMD",
+                            match: 0.99
+                        })) || [],
+                        yearPublished: paper.year || 'N/A',
+                        abstract: paper.abstract || 'No abstract available',
+                        content: paper.openAccessPdf?.url || null,
+                        fullDate: paper.publicationDate || null,
+                        link: paper.externalIds?.DOI || null,
+                        match: 0.99,
+                        id: paper.paperId || id
+                    }
+                    setPublication(transformedPaper)
+                } else {
+                    console.error("Failed to fetch paper:", response.statusText)
+                }
+            } catch (error) {
+                console.error("Error fetching paper:", error)
+            }
+            setIsLoading(false)
+        }
+        fetchPaper()
+    }, [id])
+
+    if (isLoading) {
+        return <div>Loading...</div>
+    }
+
+    if (!publication) {
+        return <div>Failed to load paper details</div>
+    }
 
     return (
         <>
             <IndividualPaper
                 publication={{
-                    name: "Effect of Chipotle on Obesity in the United States",
-                    authors: [{name: "Eric Huang", match: 0.97, university: "UMD"}, {name: "Eric Huang", match: 0.9, university: "UMD"}, {name: "Eric Huang", match: 0.82, university: "UMD"}],
-                    yearPublished: 2022,
-                    fullDate: "June 2022",
-                    link: "https://doi.org/oweariouwerio",
-                    abstract: "Many people have eaten Chipotle and became obesity shortly after. Unfortunately, obesity is an epidemic and the spread of Chipotle is concerning. This paper dives into how fat people who eat Chipotle are: Chipotle is very bad for the human body. Do not eat chiptotle",
-                    content: "https://www.aclweb.org/anthology/N18-3011.pdf",
-                    match: 0.98
+                    name: publication.name,
+                    authors: publication.authors,
+                    yearPublished: publication.yearPublished,
+                    fullDate: publication.fullDate,
+                    link: publication.link,
+                    abstract: publication.abstract,
+                    content: publication.content,
+                    match: publication.match,
+                    id: publication.id
                 }}
                 isRecommended={false} />
         </>

@@ -23,7 +23,8 @@ export type LongformPublication = Publication & {
   content: string,
   fullDate: string // Determine whether we should keep this as a string or change to a datetime object,
   link: string,
-  match: number
+  match: number,
+  id: string
 }
 
 
