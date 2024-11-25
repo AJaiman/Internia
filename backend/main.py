@@ -45,6 +45,12 @@ async def create_user(new_user: NewUser):
     # Add to DB
     try:
         result = users_collection.insert_one(new_user.model_dump())
+        # Get initial paper recommendations for the new user
+        try:
+            await get_paper_recommendations(new_user.email)
+        except Exception as e:
+            print(f"Error getting initial recommendations: {e}")
+            # Continue even if recommendations fail, since user was created successfully
         return {"message": "User created successfully", "user_id": str(result.inserted_id)}
     except Exception as e:
         raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, detail=str(e))

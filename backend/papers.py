@@ -23,7 +23,7 @@ def get_paper_batch_info(paper_ids: list[str]):
         return response.json()
     
 def get_paper_recs(positive_papers: list[str], negative_papers: list[str]):
-    queryParams = {"limit": 500, "fields": "isOpenAccess"}
+    queryParams = {"limit": 500, "fields": "openAccessPdf"}
     response = requests.post(
         paper_recommendations_url,
         json={
@@ -36,12 +36,11 @@ def get_paper_recs(positive_papers: list[str], negative_papers: list[str]):
         print(f"Error getting paper recommendations: {response.status_code}")
         return None
     
-    # TODO Make it filter using if openAccessPdf.url is not None rather than filter for isOpenAccess
     response_data = response.json()
     if "recommendedPapers" in response_data:
         open_access_papers = [
             paper for paper in response_data["recommendedPapers"] 
-            if paper.get("isOpenAccess", False)
+            if paper["openAccessPdf"] is not None
         ]
         response_data["recommendedPapers"] = open_access_papers
         response = {"recommendedPapers": [paper["paperId"] for paper in response_data["recommendedPapers"]]}
