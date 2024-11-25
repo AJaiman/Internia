@@ -11,6 +11,12 @@ export default function DashboardPage() {
 
     const [recommendedPaper, setRecommendedPaper] = useState<LongformPublication>();
     const [isLoading, setIsLoading] = useState(true);
+    const [refreshTrigger, setRefreshTrigger] = useState(false);
+
+    const handleFeedbackSubmit = () => {
+        setRefreshTrigger(prev => !prev)
+        window.location.reload()
+    }
 
     useEffect(() => {
         const getRecommendedPaper = async () => {
@@ -55,7 +61,7 @@ export default function DashboardPage() {
             }   
         }
         getRecommendedPaper()
-    }, []);
+    }, [refreshTrigger]);
     if (!recommendedPaper) {
         return <div>Loading...</div>
     }
@@ -63,7 +69,8 @@ export default function DashboardPage() {
         <>
             <Paper
                 publication={recommendedPaper}
-                isRecommended={true} />
+                isRecommended={true}
+                onFeedbackSubmit={handleFeedbackSubmit} />
         </>
     )
 }

@@ -1,3 +1,5 @@
+'use client'
+
 import { CalendarIcon, LinkIcon } from "@heroicons/react/24/solid"
 import PaperCard from "@/app/ui/paper/paper-card"
 import AbstractCard from "@/app/ui/paper/abstract-card"
@@ -5,14 +7,72 @@ import PaperContent from "@/app/ui/paper/paper-content"
 import { LongformPublication } from "@/app/lib/types"
 import ProfessorCard from "@/app/ui/paper/author-card"
 import Slider from "@/app/ui/paper/slider"
+import { useSession } from "next-auth/react"
 
 export default function Paper({
     publication,
-    isRecommended = false
+    isRecommended = false,
+    onFeedbackSubmit
 }: {
     publication: LongformPublication,
-    isRecommended?: boolean
+    isRecommended?: boolean,
+    onFeedbackSubmit: () => void
 }) {
+    const { data: session } = useSession()
+    const email = session?.user?.email
+
+    const removePaperFromRecommended = async () => {
+        if (email) {
+            try {
+                const response = await fetch(`http://localhost:8000/user/recommended-papers/${email}/${publication.id}`, {
+                    method: 'DELETE'
+                });
+                if (!response.ok) {
+                    console.error('Error removing paper from recommendations:', response.statusText);
+                }
+            } catch (error) {
+                console.error('Error removing paper from recommendations:', error);
+            }
+        }
+    }
+
+    const handleGood = async () => {
+        console.log("Good")
+        
+        if (email) {
+            try {
+                const response = await fetch(`http://localhost:8000/user/liked-papers/${email}/${publication.id}`, {
+                    method: 'POST'
+                })
+                if (!response.ok) {
+                    console.error('Error liking paper:', response.statusText)
+                }
+                removePaperFromRecommended()
+                onFeedbackSubmit()
+            } catch (error) {
+                console.error('Error liking paper:', error)
+            }
+        }
+    }
+
+    const handleBad = async () => {
+        console.log("Bad")
+        if (email) {
+            try {
+                const response = await fetch(`http://localhost:8000/user/disliked-papers/${email}/${publication.id}`, {
+                    method: 'POST'
+                })
+                if (!response.ok) {
+                    console.error('Error disliking paper:', response.statusText)
+                }
+                removePaperFromRecommended()
+                onFeedbackSubmit()
+            } catch (error) {
+                console.error('Error disliking paper:', error)
+            }
+        }
+    }
+
     return (
         <div className="flex flex-col items-center w-full h-full py-4">
             <div className="flex flex-row w-[93.75%] h-[34%] items-center justify-between">
@@ -54,8 +114,8 @@ export default function Paper({
                             </div>
                         </div>
                     </div>  
-                    <button className="bg-royalPurple/75 hover:bg-royalPurple/50 w-full h-12 rounded-[6px] text-white font-bold">Good</button>
-                    <button className="bg-royalPurple hover:bg-royalPurple/75 w-full h-12 rounded-[6px] text-white font-bold">Bad</button>
+                    <button className="bg-royalPurple/75 hover:bg-royalPurple/50 w-full h-12 rounded-[6px] text-white font-bold" onClick={handleGood}>Good</button>
+                    <button className="bg-royalPurple hover:bg-royalPurple/75 w-full h-12 rounded-[6px] text-white font-bold" onClick={handleBad}>Bad</button>
                 </div>
             </div>
         </div>
