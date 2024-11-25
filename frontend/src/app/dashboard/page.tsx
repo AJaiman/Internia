@@ -1,21 +1,67 @@
-import React from "react";
-import Paper from "../ui/paper/paper";
+'use client'
 
+import React, { useEffect, useState } from "react";
+import Paper from "../ui/paper/paper";
+import { useSession } from "next-auth/react";
+import { LongformPublication } from "../lib/types";
 export default function DashboardPage() {
+    const paperThreshold = 10 // Updates list of recommended papers when the list is less than this threshold
+    const { data: session } = useSession();
+    const email = session?.user?.email;
+
+    const [recommendedPaper, setRecommendedPaper] = useState<LongformPublication>();
+    const [isLoading, setIsLoading] = useState(true);
+
+    useEffect(() => {
+        const getRecommendedPaper = async () => {
+            if (email) {
+                try {
+                    const response = await fetch(`http://localhost:8000/user/recommended-papers/${email}`);
+                    if (response.ok) {
+                        const data = await response.json()
+                        const papers = data.papers
+                        if (papers.length < paperThreshold) {
+                            const newPapers = await fetch(`http://localhost:8000/paper/recommendations/${email}`)
+                            if (!newPapers.ok) {
+                                console.error("Error fetching new papers:", newPapers.statusText);
+                            } else {
+                                console.log(newPapers)
+                            }
+                        }
+                            console.log(papers)
+                            const transformedPaper = {
+                            name: papers[0].title || 'Untitled',
+                            authors: papers[0].authors?.map((author: any) => ({
+                                name: author.name || 'Unknown Author',
+                                university: "UMD",
+                                match: 0.99
+                            })) || [],
+                            yearPublished: papers[0].year || 'N/A',
+                            fullDate: papers[0].publicationDate || null,
+                            link: papers[0].externalIds?.DOI || null,
+                            abstract: papers[0].abstract || 'No abstract available',
+                            content: papers[0].openAcccessPdf?.url || null,
+                            match: 0.99,
+                            id: papers[0].paperId
+                        }
+                        setRecommendedPaper(transformedPaper)
+                    }
+
+                } catch (error) {
+                    console.error("Error fetching recommended paper:", error);
+                }
+                setIsLoading(false)
+            }   
+        }
+        getRecommendedPaper()
+    }, []);
+    if (!recommendedPaper) {
+        return <div>Loading...</div>
+    }
     return (
         <>
             <Paper
-                publication={{
-                    name: "Effect of Chipotle on Obesity in the United States",
-                    authors: [{name: "Eric Huang", match: 0.97, university: "UMD"}, {name: "Eric Huang", match: 0.9, university: "UMD"}, {name: "Eric Huang", match: 0.82, university: "UMD"}],
-                    yearPublished: 2022,
-                    fullDate: "June 2022",
-                    link: "https://doi.org/oweariouwerio",
-                    abstract: "Many people have eaten Chipotle and became obesity shortly after. Unfortunately, obesity is an epidemic and the spread of Chipotle is concerning. This paper dives into how fat people who eat Chipotle are: Chipotle is very bad for the human body. Do not eat chiptotle",
-                    content: "https://www.aclweb.org/anthology/N18-3011.pdf",
-                    match: 0.98,
-                    id: "649def34f8be52c8b66281af98ae884c09aef38b"
-                }}
+                publication={recommendedPaper}
                 isRecommended={true} />
         </>
     )
