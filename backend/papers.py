@@ -21,3 +21,28 @@ def get_paper_batch_info(paper_ids: list[str]):
         print(f"Error getting paper batch info: {response.status_code}")
     else:
         return response.json()
+    
+def get_paper_recs(positive_papers: list[str], negative_papers: list[str]):
+    queryParams = {"fields": "isOpenAccess"}
+    response = requests.post(
+        paper_recommendations_url,
+        json={
+            "positivePaperIds": positive_papers,
+            "negativePaperIds": negative_papers
+        },
+        params=queryParams
+    )
+    if response.status_code != 200:
+        print(f"Error getting paper recommendations: {response.status_code}")
+        return None
+    
+    # Filter for only open access papers
+    response_data = response.json()
+    if "recommendedPapers" in response_data:
+        open_access_papers = [
+            paper for paper in response_data["recommendedPapers"] 
+            if paper.get("isOpenAccess", False)
+        ]
+        response_data["recommendedPapers"] = open_access_papers
+        return response_data
+    return None

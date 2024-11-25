@@ -128,5 +128,22 @@ async def get_paper(paper_id: str):
     paper_details = get_paper_info(paper_id)
     return paper_details
 
+@router.get("/paper/recommendations/{user_email}")
+async def get_paper_recommendations(user_email: str):
+    # Get user from database
+    user = users_collection.find_one({"email": user_email})
+    if not user:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="User not found")
+
+    # Get user's liked and disliked papers
+    positive_papers = list(user["liked_papers"])
+    negative_papers = list(user["disliked_papers"])
+
+    # Get recommendations using the papers API
+    recommendations = get_paper_recs(positive_papers, negative_papers)
+    if not recommendations:
+        raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, detail="Error getting recommendations")
+
+    return recommendations
 app.include_router(router)
 
