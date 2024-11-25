@@ -35,10 +35,11 @@ async def create_user(new_user: NewUser):
         last_name=new_user.last_name,
         email=new_user.email,
         tags=[],
-        liked_papers=[],
+        liked_papers=["649def34f8be52c8b66281af98ae884c09aef38b"], #TODO update this to make sure that it's not hardcoded and that it comes from the user's selected field of interest
         disliked_papers=[],
         saved_papers=[],
         saved_researchers=[],
+        recommended_papers=[]
     )
 
     # Add to DB
@@ -141,6 +142,19 @@ async def get_paper_recommendations(user_email: str):
 
     # Get recommendations using the papers API
     recommendations = get_paper_recs(positive_papers, negative_papers)
+
+
+    # Update user's recommended papers list, avoiding duplicates
+    recommended_papers = list(recommendations["recommendedPapers"])
+    current_recommended = set(user["recommended_papers"])
+    new_recommended = set(recommended_papers)
+    updated_recommended = list(current_recommended.union(new_recommended))
+
+    # Update user document with new recommendations
+    users_collection.update_one(
+        {"email": user_email},
+        {"$set": {"recommended_papers": updated_recommended}}
+    )
     if not recommendations:
         raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, detail="Error getting recommendations")
 

@@ -8,7 +8,8 @@ def single_user(user):
         "liked_papers": user["liked_papers"],
         "disliked_papers": user["disliked_papers"],
         "saved_papers": user["saved_papers"],
-        "saved_researchers": user["saved_researchers"]
+        "saved_researchers": user["saved_researchers"],
+        "recommended_papers": user["recommended_papers"]
     }
 
 def all_users(users):
