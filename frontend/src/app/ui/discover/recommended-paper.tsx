@@ -6,7 +6,9 @@ import { useSession } from "next-auth/react";
 
 export default function RecommendedPaper({ publication, addFavoriteButton = false, isFavorited = false } : { publication: LongformPublication, addFavoriteButton?: boolean, isFavorited?: boolean }) {
     const {data: session} = useSession()
-    const truncatedAbstract = publication.abstract.split(/\s+/).slice(0, 30).join(" ") + "..."
+    const truncatedAbstract = publication.abstract 
+        ? publication.abstract.split(/\s+/).slice(0, 30).join(" ") + "..."
+        : "No abstract available";
     const truncatedAuthors = publication.authors.length <= 3 ? 
         publication.authors.map((author) => author.name.split(/\s+/).slice(-1)[0]).join(", ")
         : publication.authors[0].name.split(/\s+/).slice(-1)[0] + " et al."
