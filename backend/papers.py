@@ -36,7 +36,7 @@ def get_paper_recs(positive_papers: list[str], negative_papers: list[str]):
         print(f"Error getting paper recommendations: {response.status_code}")
         return None
     
-    # Filter for only open access papers
+    # TODO Make it filter using if openAccessPdf.url is not None rather than filter for isOpenAccess
     response_data = response.json()
     if "recommendedPapers" in response_data:
         open_access_papers = [

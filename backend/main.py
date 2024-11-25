@@ -81,6 +81,17 @@ async def get_saved_papers(email: str):
     
     return {"papers": paper_details}
 
+@router.get("/user/recommended-papers/{email}")
+async def get_recommended_papers(email: str):
+    user = users_collection.find_one({"email": email})
+    if not user:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="User not found")
+    
+    recommended_papers = list(user["recommended_papers"])
+    paper_details = get_paper_batch_info(recommended_papers)
+    
+    return {"papers": paper_details}
+
 @router.delete("/user/saved-papers/{email}/{paper_id}")
 async def remove_saved_paper(email: str, paper_id: str):
     user = users_collection.find_one({"email": email})
