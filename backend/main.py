@@ -134,6 +134,69 @@ async def add_saved_paper(email: str, paper_id: str):
     
     return {"message": "Paper added to saved papers successfully"}
 
+@router.delete("/user/recommended-papers/{email}/{paper_id}")
+async def remove_recommended_paper(email: str, paper_id: str):
+    user = users_collection.find_one({"email": email})
+    if not user:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="User not found")
+    
+    # Remove paper from recommended papers list
+    recommended_papers = list(user["recommended_papers"])
+    if paper_id not in recommended_papers:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Paper not found in recommended papers")
+        
+    recommended_papers.remove(paper_id)
+    
+    # Update user document
+    users_collection.update_one(
+        {"email": email},
+        {"$set": {"recommended_papers": recommended_papers}}
+    )
+    
+    return {"message": "Paper removed from recommended papers successfully"}
+
+@router.post("/user/liked-papers/{email}/{paper_id}")
+async def add_liked_paper(email: str, paper_id: str):
+    user = users_collection.find_one({"email": email})
+    if not user:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="User not found")
+    
+    # Add paper to liked papers list if not already present
+    liked_papers = list(user["liked_papers"])
+    if paper_id in liked_papers:
+        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Paper already liked")
+        
+    liked_papers.append(paper_id)
+    
+    # Update user document
+    users_collection.update_one(
+        {"email": email},
+        {"$set": {"liked_papers": liked_papers}}
+    )
+    
+    return {"message": "Paper added to liked papers successfully"}
+
+@router.post("/user/disliked-papers/{email}/{paper_id}")
+async def add_disliked_paper(email: str, paper_id: str):
+    user = users_collection.find_one({"email": email})
+    if not user:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="User not found")
+    
+    # Add paper to disliked papers list if not already present
+    disliked_papers = list(user["disliked_papers"])
+    if paper_id in disliked_papers:
+        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Paper already disliked")
+        
+    disliked_papers.append(paper_id)
+    
+    # Update user document
+    users_collection.update_one(
+        {"email": email},
+        {"$set": {"disliked_papers": disliked_papers}}
+    )
+    
+    return {"message": "Paper added to disliked papers successfully"}
+
 # Paper Routes
 @router.get("/paper/{paper_id}")
 async def get_paper(paper_id: str):

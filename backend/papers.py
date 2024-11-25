@@ -23,7 +23,7 @@ def get_paper_batch_info(paper_ids: list[str]):
         return response.json()
     
 def get_paper_recs(positive_papers: list[str], negative_papers: list[str]):
-    queryParams = {"fields": "isOpenAccess"}
+    queryParams = {"fields": "isOpenAccess", "limit": 300}
     response = requests.post(
         paper_recommendations_url,
         json={
