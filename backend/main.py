@@ -38,7 +38,7 @@ async def create_user(new_user: NewUser):
         liked_papers=[],
         disliked_papers=[],
         saved_papers=[],
-        saved_researchers=[]
+        saved_researchers=[],
     )
 
     # Add to DB

@@ -44,5 +44,6 @@ def get_paper_recs(positive_papers: list[str], negative_papers: list[str]):
             if paper.get("isOpenAccess", False)
         ]
         response_data["recommendedPapers"] = open_access_papers
-        return response_data
+        response = {"recommendedPapers": [paper["paperId"] for paper in response_data["recommendedPapers"]]}
+        return response
     return None
