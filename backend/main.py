@@ -80,6 +80,48 @@ async def get_saved_papers(email: str):
     
     return {"papers": paper_details}
 
+@router.delete("/user/saved-papers/{email}/{paper_id}")
+async def remove_saved_paper(email: str, paper_id: str):
+    user = users_collection.find_one({"email": email})
+    if not user:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="User not found")
+    
+    # Remove paper from saved papers list
+    saved_papers = list(user["saved_papers"])
+    if paper_id not in saved_papers:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Paper not found in saved papers")
+        
+    saved_papers.remove(paper_id)
+    
+    # Update user document
+    users_collection.update_one(
+        {"email": email}, 
+        {"$set": {"saved_papers": saved_papers}}
+    )
+    
+    return {"message": "Paper removed from saved papers successfully"}
+
+@router.post("/user/saved-papers/{email}/{paper_id}") 
+async def add_saved_paper(email: str, paper_id: str):
+    user = users_collection.find_one({"email": email})
+    if not user:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="User not found")
+    
+    # Add paper to saved papers list if not already present
+    saved_papers = list(user["saved_papers"])
+    if paper_id in saved_papers:
+        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Paper already saved")
+        
+    saved_papers.append(paper_id)
+    
+    # Update user document
+    users_collection.update_one(
+        {"email": email},
+        {"$set": {"saved_papers": saved_papers}}
+    )
+    
+    return {"message": "Paper added to saved papers successfully"}
+
 # Paper Routes
 @router.get("/paper/{paper_id}")
 async def get_paper(paper_id: str):
@@ -87,3 +129,4 @@ async def get_paper(paper_id: str):
     return paper_details
 
 app.include_router(router)
+

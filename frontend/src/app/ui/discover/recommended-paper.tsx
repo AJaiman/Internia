@@ -2,8 +2,10 @@ import { CalendarIcon, NewspaperIcon, StarIcon, UserIcon } from "@heroicons/reac
 import Link from "next/link";
 import { LongformPublication } from "@/app/lib/types";
 import FavoritePill from "@/app/ui/favorite-pill";
+import { useSession } from "next-auth/react";
 
 export default function RecommendedPaper({ publication, addFavoriteButton = false, isFavorited = false } : { publication: LongformPublication, addFavoriteButton?: boolean, isFavorited?: boolean }) {
+    const {data: session} = useSession()
     const truncatedAbstract = publication.abstract.split(/\s+/).slice(0, 30).join(" ") + "..."
     const truncatedAuthors = publication.authors.length <= 3 ? 
         publication.authors.map((author) => author.name.split(/\s+/).slice(-1)[0]).join(", ")
@@ -12,6 +14,36 @@ export default function RecommendedPaper({ publication, addFavoriteButton = fals
     // Hacky way to alternate the two components depending on whether or not there's a favorite button
     const MainComponent = addFavoriteButton ? "div" : Link
     const SecondaryComponent = addFavoriteButton ? Link : "h1"
+
+    const handleFavorite = () => {
+        fetch(`http://localhost:8000/user/saved-papers/${session?.user?.email}/${publication.id}`, {
+            method: 'POST',
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Failed to save paper');
+            }
+            console.log('Paper saved successfully');
+        })
+        .catch(error => {
+            console.error('Error saving paper:', error);
+        });
+    }
+
+    const handleUnfavorite = () => {
+        fetch(`http://localhost:8000/user/saved-papers/${session?.user?.email}/${publication.id}`, {
+            method: 'DELETE',
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Failed to remove paper');
+            }
+            console.log('Paper removed successfully');
+        })
+        .catch(error => {
+            console.error('Error removing paper:', error);
+        });
+    }
 
     return (
         <MainComponent href={`/discover/paper/${publication.id}`} className={`relative flex-shrink-0 flex flex-row w-full h-32 transition ${addFavoriteButton ? '' : 'hover:translate-x-3'}`}>
@@ -43,7 +75,7 @@ export default function RecommendedPaper({ publication, addFavoriteButton = fals
                         <UserIcon className="text-royalPurple/75 w-4 h-4" />
                         <h1 className="text-xs text-royalPurple font-light">Authored by <span className="font-medium">{truncatedAuthors}</span></h1>
                     </div>
-                    { addFavoriteButton ? <FavoritePill initialState={isFavorited} /> : <></>}
+                    { addFavoriteButton ? <FavoritePill initialState={isFavorited} onFavorite={handleFavorite} onUnfavorite={handleUnfavorite} /> : <></>}
                 </div>
             </div>
         </MainComponent>
