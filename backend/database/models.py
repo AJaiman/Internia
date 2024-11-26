@@ -11,6 +11,7 @@ class User(BaseModel):
     saved_papers: list[str]
     saved_researchers: list[str]
     recommended_papers: list[str]
+    paper_history: list[str]
 
 class NewUser(BaseModel):
     first_name: str

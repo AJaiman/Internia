@@ -39,7 +39,8 @@ async def create_user(new_user: NewUser):
         disliked_papers=[],
         saved_papers=[],
         saved_researchers=[],
-        recommended_papers=[]
+        recommended_papers=[],
+        paper_history=[]
     )
 
     # Add to DB
@@ -67,7 +68,7 @@ async def delete_user(user_id: str):
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="User not found")
     return {"message": "User deleted successfully"}
 
-@router.patch("/user")
+@router.patch("/user") #TODO: Delete this route just for testing
 async def update_user(update_user: UpdateUser):
     user = users_collection.find_one({"email": update_user.email})
     if not user:
