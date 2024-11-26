@@ -214,6 +214,29 @@ async def get_paper_history(email: str):
     paper_details = get_paper_batch_info(paper_history)
     
     return {"papers": paper_details}
+
+@router.post("/user/paper-history/{email}/{paper_id}")
+async def add_paper_history(email: str, paper_id: str):
+    user = users_collection.find_one({"email": email})
+    if not user:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="User not found")
+    
+    # Add paper to paper history list if not already present
+    paper_history = list(user["paper_history"])
+    if paper_id in paper_history:
+        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Paper already in history")
+        
+    paper_history.append(paper_id)
+    
+    # Update user document
+    users_collection.update_one(
+        {"email": email},
+        {"$set": {"paper_history": paper_history}}
+    )
+    
+    return {"message": "Paper added to history successfully"}
+
+
 # Paper Routes (Semantic Scholar API)
 @router.get("/paper/{paper_id}")
 async def get_paper(paper_id: str):
