@@ -8,6 +8,7 @@ import { LongformProfessor, LongformPublication } from "@/app/lib/types"
 import { useSession } from "next-auth/react"
 
 export default function Page() {
+    // TODO Find better way to handle unfavoriting that doesn't require a reload
     const [tab, setTab] = useState<"Papers" | "Professors">("Papers")
     const [savedPapers, setSavedPapers] = useState<LongformPublication[]>([])
     const [isLoading, setIsLoading] = useState(true)
@@ -43,9 +44,13 @@ export default function Page() {
             }
             setIsLoading(false)
         }
+        }
+        fetchPapers()
+    }, [session])
+
+    const handleUnfavorite = () => {
+        window.location.reload()
     }
-    fetchPapers()
-}, [session])
 
     // Placeholder that should be filled in later
     const viewedProfessor: LongformProfessor = { 
@@ -110,7 +115,7 @@ export default function Page() {
                 <Paginator pageSize={4}>
                     { 
                         tab == 'Papers' 
-                        ? savedPapers.map((paper, index) => <RecommendedPaper key={index} publication={paper} addFavoriteButton={true} isFavorited={true}/>)
+                        ? savedPapers.map((paper, index) => <RecommendedPaper key={index} publication={paper} addFavoriteButton={true} isFavorited={true} onUnfavorite={handleUnfavorite}/>)
                         : viewedProfessors.map((professor, index) => <RecommendedProfessor key={index} professor={professor} addFavoriteButton={true} isFavorited={true} />)
                     }
                 </Paginator>

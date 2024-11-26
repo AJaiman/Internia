@@ -4,7 +4,7 @@ import { LongformPublication } from "@/app/lib/types";
 import FavoritePill from "@/app/ui/favorite-pill";
 import { useSession } from "next-auth/react";
 
-export default function RecommendedPaper({ publication, addFavoriteButton = false, isFavorited = false } : { publication: LongformPublication, addFavoriteButton?: boolean, isFavorited?: boolean }) {
+export default function RecommendedPaper({ publication, addFavoriteButton = false, isFavorited = false, onFavorite, onUnfavorite } : { publication: LongformPublication, addFavoriteButton?: boolean, isFavorited?: boolean, onFavorite?: () => void, onUnfavorite?: () => void }) {
     const {data: session} = useSession()
     const truncatedAbstract = publication.abstract 
         ? publication.abstract.split(/\s+/).slice(0, 30).join(" ") + "..."
@@ -26,6 +26,7 @@ export default function RecommendedPaper({ publication, addFavoriteButton = fals
                 throw new Error('Failed to save paper');
             }
             console.log('Paper saved successfully');
+            onFavorite?.()
         })
         .catch(error => {
             console.error('Error saving paper:', error);
@@ -41,6 +42,7 @@ export default function RecommendedPaper({ publication, addFavoriteButton = fals
                 throw new Error('Failed to remove paper');
             }
             console.log('Paper removed successfully');
+            onUnfavorite?.()
         })
         .catch(error => {
             console.error('Error removing paper:', error);
