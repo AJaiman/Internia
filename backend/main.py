@@ -211,7 +211,13 @@ async def get_paper_history(email: str):
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="User not found")
     
     paper_history = list(user["paper_history"])
+    saved_papers = set(user["saved_papers"])
+    
     paper_details = get_paper_batch_info(paper_history)
+    
+    # Add isSaved field to each paper
+    for paper in paper_details:
+        paper["isSaved"] = paper["paperId"] in saved_papers
     
     return {"papers": paper_details}
 

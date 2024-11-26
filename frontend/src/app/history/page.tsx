@@ -33,7 +33,8 @@ export default function Page() {
                             fullDate: paper.publicationDate,
                             link: paper.externalIds?.DOI,
                             match: 0.99,
-                            id: paper.paperId
+                            id: paper.paperId,
+                            isSaved: paper.isSaved
                         }
                     })
                     setViewedPapers(transformedPapers)
@@ -109,7 +110,7 @@ export default function Page() {
                 <Paginator pageSize={4}>
                     { 
                         tab == 'Papers' 
-                        ? viewedPapers.map((paper, index) => <RecommendedPaper key={index} publication={paper} addFavoriteButton={true} />)
+                        ? viewedPapers.map((paper, index) => <RecommendedPaper key={index} publication={paper} addFavoriteButton={true} isFavorited={paper.isSaved}/>)
                         : viewedProfessors.map((professor, index) => <RecommendedProfessor key={index} professor={professor} addFavoriteButton={true} />)
                     }
                 </Paginator>

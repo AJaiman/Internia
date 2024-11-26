@@ -24,7 +24,8 @@ export type LongformPublication = Publication & {
   fullDate: string // Determine whether we should keep this as a string or change to a datetime object,
   link: string,
   match: number,
-  id: string
+  id: string,
+  isSaved?: boolean
 }
 
 
