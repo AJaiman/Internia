@@ -204,7 +204,17 @@ async def add_disliked_paper(email: str, paper_id: str):
     
     return {"message": "Paper added to disliked papers successfully"}
 
-# Paper Routes
+@router.get("/user/paper-history/{email}")
+async def get_paper_history(email: str):
+    user = users_collection.find_one({"email": email})
+    if not user:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="User not found")
+    
+    paper_history = list(user["paper_history"])
+    paper_details = get_paper_batch_info(paper_history)
+    
+    return {"papers": paper_details}
+# Paper Routes (Semantic Scholar API)
 @router.get("/paper/{paper_id}")
 async def get_paper(paper_id: str):
     paper_details = get_paper_info(paper_id)
