@@ -36,6 +36,21 @@ export default function Paper({
         }
     }
 
+    const addPaperToHistory = async () => {
+        if (email) {
+            try {
+                const response = await fetch(`http://localhost:8000/user/paper-history/${email}/${publication.id}`, {
+                    method: 'POST'
+                });
+                if (!response.ok) {
+                    console.error('Error adding paper to history:', response.statusText);
+                }
+            } catch (error) {
+                console.error('Error adding paper to history:', error);
+            }
+        }
+    }
+
     const handleGood = async () => {
         console.log("Good")
         
@@ -48,6 +63,7 @@ export default function Paper({
                     console.error('Error liking paper:', response.statusText)
                 }
                 removePaperFromRecommended()
+                addPaperToHistory()
                 onFeedbackSubmit()
             } catch (error) {
                 console.error('Error liking paper:', error)
@@ -66,6 +82,7 @@ export default function Paper({
                     console.error('Error disliking paper:', response.statusText)
                 }
                 removePaperFromRecommended()
+                addPaperToHistory()
                 onFeedbackSubmit()
             } catch (error) {
                 console.error('Error disliking paper:', error)
