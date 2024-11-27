@@ -21,6 +21,8 @@ app.add_middleware(
 
 router = APIRouter()
 
+#TODO Remove tags from user model
+
 # User Routes
 @router.post("/user")
 async def create_user(new_user: NewUser):
@@ -242,6 +244,24 @@ async def add_paper_history(email: str, paper_id: str):
     
     return {"message": "Paper added to history successfully"}
 
+@router.post("/user/interests/{email}")
+async def update_interests(email: str, interests: list[str]):
+    user = users_collection.find_one({"email": email})
+    if not user:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="User not found")
+    
+    # Convert interests to paper IDs using interestsList function
+    paper_ids = interestsList(interests)
+    
+    # Update user's liked papers with the interest paper IDs
+    users_collection.update_one(
+        {"email": email},
+        {"$set": {
+            "liked_papers": paper_ids,
+        }}
+    )
+    
+    return {"message": "User interests updated successfully"}
 
 # Paper Routes (Semantic Scholar API)
 @router.get("/paper/{paper_id}")
