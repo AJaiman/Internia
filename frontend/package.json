@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@fortawesome/react-fontawesome": "^0.2.2",
     "@heroicons/react": "^2.1.5",
     "@hookform/resolvers": "^3.3.4",
     "@mapbox/node-pre-gyp": "^1.0.11",

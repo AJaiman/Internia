@@ -1,16 +1,19 @@
 'use client'
 
 import React, { useEffect, useState } from "react";
-import Paper from "../ui/paper/paper";
+import Paper from "@/app/ui/paper/paper";
 import { useSession } from "next-auth/react";
-import { LongformPublication } from "../lib/types";
+import { LongformPublication } from "@/app/lib/types";
+import FieldSelector from "@/app/ui/field-selector";
+
+
 export default function DashboardPage() {
     const paperThreshold = 10 // Updates list of recommended papers when the list is less than this threshold
     const { data: session } = useSession();
     const email = session?.user?.email;
 
     const [recommendedPaper, setRecommendedPaper] = useState<LongformPublication>();
-    const [isLoading, setIsLoading] = useState(true);
+    const [fieldsChosen, setFieldsChosen] = useState(false);
     const [refreshTrigger, setRefreshTrigger] = useState(false);
 
     const handleFeedbackSubmit = () => {
@@ -19,23 +22,36 @@ export default function DashboardPage() {
     }
 
     useEffect(() => {
-        const getRecommendedPaper = async () => {
+        const assertFieldsChosen = async () => {
             if (email) {
+                const response = await fetch(`${process.env.BACKEND_URL}/get_user_fields/${email}`)
+
+                if (response.ok) {
+                    const data = await response.json()
+                    if (data.length != 0) {
+                        setFieldsChosen(true);
+                    }
+                }
+            }
+        }
+        
+        const getRecommendedPaper = async () => {
+            if (email && fieldsChosen) {
                 try {
-                    const response = await fetch(`http://localhost:8000/user/recommended-papers/${email}`);
+                    const response = await fetch(`${process.env.BACKEND_URL}/user/recommended-papers/${email}`);
                     if (response.ok) {
                         const data = await response.json()
                         const papers = data.papers
                         if (papers.length < paperThreshold) {
-                            const newPapers = await fetch(`http://localhost:8000/paper/recommendations/${email}`)
+                            const newPapers = await fetch(`${process.env.BACKEND_URL}/paper/recommendations/${email}`)
                             if (!newPapers.ok) {
                                 console.error("Error fetching new papers:", newPapers.statusText);
                             } else {
                                 console.log(newPapers)
                             }
                         }
-                            console.log(papers)
-                            const transformedPaper = {
+
+                        const transformedPaper = {
                             name: papers[0].title || 'Untitled',
                             authors: papers[0].authors?.map((author: any) => ({
                                 name: author.name || 'Unknown Author',
@@ -57,12 +73,19 @@ export default function DashboardPage() {
                 } catch (error) {
                     console.error("Error fetching recommended paper:", error);
                 }
-                setIsLoading(false)
             }   
         }
+        
+        assertFieldsChosen()
         getRecommendedPaper()
     }, [refreshTrigger]);
-    if (!recommendedPaper) {
+
+    if (!fieldsChosen) {
+        return (
+            <FieldSelector />
+        )
+    }
+    else if (!recommendedPaper) {
         return <div>Loading...</div>
     }
     return (
