@@ -4,7 +4,6 @@ import React, { useEffect, useState } from "react";
 import Paper from "@/app/ui/paper/paper";
 import { useSession } from "next-auth/react";
 import { LongformPublication } from "@/app/lib/types";
-import FieldSelector from "@/app/ui/field-selector";
 
 
 export default function DashboardPage() {
@@ -13,7 +12,6 @@ export default function DashboardPage() {
     const email = session?.user?.email;
 
     const [recommendedPaper, setRecommendedPaper] = useState<LongformPublication>();
-    const [fieldsChosen, setFieldsChosen] = useState(false);
     const [refreshTrigger, setRefreshTrigger] = useState(false);
 
     const handleFeedbackSubmit = () => {
@@ -22,21 +20,8 @@ export default function DashboardPage() {
     }
 
     useEffect(() => {
-        const assertFieldsChosen = async () => {
-            if (email) {
-                const response = await fetch(`http://localhost:8000/get_user_fields/${email}`)
-
-                if (response.ok) {
-                    const data = await response.json()
-                    if (data.length != 0) {
-                        setFieldsChosen(true);
-                    }
-                }
-            }
-        }
-        
         const getRecommendedPaper = async () => {
-            if (email && fieldsChosen) {
+            if (email) {
                 try {
                     const response = await fetch(`http://localhost:8000/user/recommended-papers/${email}`);
                     if (response.ok) {
@@ -75,17 +60,10 @@ export default function DashboardPage() {
                 }
             }   
         }
-        
-        assertFieldsChosen()
         getRecommendedPaper()
     }, [refreshTrigger]);
 
-    if (!fieldsChosen) {
-        return (
-            <FieldSelector />
-        )
-    }
-    else if (!recommendedPaper) {
+    if (!recommendedPaper) {
         return <div>Loading...</div>
     }
     return (
