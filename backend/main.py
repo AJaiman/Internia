@@ -259,6 +259,7 @@ async def update_interests(email: str, interests: list[str]):
         {"email": email},
         {"$set": {
             "liked_papers": paper_ids,
+            "selectedInterests": True
         }}
     )
     
