@@ -13,14 +13,34 @@ export async function middleware(req: NextRequest) {
     req.nextUrl.pathname.startsWith(path)
   );
 
-  if (isProtectedPath) {
-    // Redirect to the main page in the event that a session doesn't exist.
-    if (!session) {
+  if (!session) {
+    // Redirect to the main page if no session exists
+    if (isProtectedPath) {
       return NextResponse.redirect(new URL('/', req.url));
     }
+    return NextResponse.next();
   }
 
-  // Allow the request to proceed
+  // Get selectedInterests from localStorage (client-side storage isn't available in middleware)
+  const selectedInterests = req.cookies.get('selectedInterests')?.value === 'true';
+
+  // If interests aren't selected:
+  // 1. Redirect to interest-selection if trying to access other pages
+  // 2. Allow access to interest-selection page
+  if (!selectedInterests) {
+    if (req.nextUrl.pathname !== '/interest-selection') {
+      return NextResponse.redirect(new URL('/interest-selection', req.url));
+    }
+    return NextResponse.next();
+  }
+
+  // If interests are selected:
+  // 1. Redirect to dashboard if trying to access interest-selection
+  // 2. Allow access to other pages
+  if (selectedInterests && req.nextUrl.pathname === '/interest-selection') {
+    return NextResponse.redirect(new URL('/dashboard', req.url));
+  }
+
   return NextResponse.next();
 }
 

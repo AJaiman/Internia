@@ -259,6 +259,14 @@ async def update_interests(email: str, interests: list[str]):
     
     return {"message": "User interests updated successfully"}
 
+@router.get("/user/selected-interests/{email}")
+async def get_selected_interests(email: str):
+    user = users_collection.find_one({"email": email})
+    if not user:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="User not found")
+    
+    return {"selectedInterests": user["selectedInterests"]}
+
 # Paper Routes (Semantic Scholar API)
 @router.get("/paper/{paper_id}")
 async def get_paper(paper_id: str):

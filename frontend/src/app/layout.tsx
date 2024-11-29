@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
 import { inter } from "@/app/ui/fonts";
-import { Analytics } from "@vercel/analytics/react"
+import { Analytics } from "@vercel/analytics/react";
 import "./globals.css";
 import Navbar from "@/app/ui/navbar";
 import Provider from "@/app/client-provider";
 import { getServerSession } from "next-auth";
-
+import RootLayoutClient from "./RootLayoutClient";
 
 export const metadata: Metadata = {
   title: "Internia",
@@ -31,8 +31,10 @@ export default async function RootLayout({
       >
         <Analytics />
         <Provider session={session}>
-          <Navbar />
-          {children}
+          <RootLayoutClient>
+            <Navbar />
+            {children}
+          </RootLayoutClient>
         </Provider>
       </body>
     </html>
