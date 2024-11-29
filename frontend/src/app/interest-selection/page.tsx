@@ -10,6 +10,7 @@ type Field = [FC<SVGProps<SVGSVGElement>>, string, string]
 export default function InterestSelection() {
     const { data: session } = useSession();
     const [fieldsChosen, setFieldsChosen] = useState<string[]>([]);
+    const [isLoading, setIsLoading] = useState(false);
     const fields: Field[] = [
         [BugAntIcon, "Biology", "biology"],
         [BeakerIcon, "Chemistry", "chemistry"],
@@ -52,6 +53,7 @@ export default function InterestSelection() {
             return;
         }
 
+        setIsLoading(true);
         try {
             // Update user interests
             const interestsResponse = await fetch(`http://localhost:8000/user/interests/${session?.user?.email}`, {
@@ -79,7 +81,18 @@ export default function InterestSelection() {
         } catch (error) {
             console.error('Error:', error);
             alert('An error occurred. Please try again.');
+        } finally {
+            setIsLoading(false);
         }
+    }
+
+    if (isLoading) {
+        return (
+            <div className="flex flex-col items-center justify-center w-full h-4/5">
+                <div className="animate-spin rounded-full h-16 w-16 border-t-2 border-b-2 border-royalPurple"></div>
+                <h2 className="mt-4 text-xl font-medium">Setting up your preferences...</h2>
+            </div>
+        );
     }
 
     return (
