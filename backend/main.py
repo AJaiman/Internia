@@ -37,7 +37,7 @@ async def create_user(new_user: NewUser):
         last_name=new_user.last_name,
         email=new_user.email,
         tags=[],
-        liked_papers=["649def34f8be52c8b66281af98ae884c09aef38b"], #TODO update this to make sure that it's not hardcoded and that it comes from the user's selected field of interest
+        liked_papers=[],
         disliked_papers=[],
         saved_papers=[],
         saved_researchers=[],

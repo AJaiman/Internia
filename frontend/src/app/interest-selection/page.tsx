@@ -8,7 +8,7 @@ import FieldPill from "../ui/field-pill";
 type Field = [FC<SVGProps<SVGSVGElement>>, string, string]
 
 export default function InterestSelection() {
-    const { data } = useSession();
+    const { data: session } = useSession();
     const [fieldsChosen, setFieldsChosen] = useState<string[]>([]);
     const fields: Field[] = [
         [BugAntIcon, "Biology", "biology"],
@@ -46,10 +46,46 @@ export default function InterestSelection() {
         }
     }
 
+    const handleGetStarted = async () => {
+        if (fieldsChosen.length === 0) {
+            alert("Please select at least one field of interest");
+            return;
+        }
+
+        try {
+            // Update user interests
+            const interestsResponse = await fetch(`http://localhost:8000/user/interests/${session?.user?.email}`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(fieldsChosen)
+            });
+
+            if (!interestsResponse.ok) {
+                throw new Error('Failed to update interests');
+            }
+
+            // Get initial recommendations
+            const recommendationsResponse = await fetch(`http://localhost:8000/paper/recommendations/${session?.user?.email}`);
+            
+            if (!recommendationsResponse.ok) {
+                throw new Error('Failed to get recommendations');
+            }
+
+            // Redirect to dashboard
+            window.location.href = '/dashboard';
+
+        } catch (error) {
+            console.error('Error:', error);
+            alert('An error occurred. Please try again.');
+        }
+    }
+
     return (
         <div className="flex flex-col w-full h-4/5 p-4">
             <h1 className="text-2xl font-medium">
-                Welcome, {data?.user?.name?.split(/\s+/)[0]}!
+                Welcome, {session?.user?.name?.split(/\s+/)[0]}!
             </h1>
             <h1 className="font-light">
                 Choose at least <span className="font-bold">one</span> field that you're interested in to get started with Internia.
@@ -68,7 +104,7 @@ export default function InterestSelection() {
                     )
                 }
             </div>
-            <button className="flex flex-row gap-3 items-center justify-center w-[37%] h-14 mt-4 rounded-xl bg-royalPurple hover:bg-royalPurple/85 text-white">
+            <button onClick={() => {handleGetStarted()}} className="flex flex-row gap-3 items-center justify-center w-[37%] h-14 mt-4 rounded-xl bg-royalPurple hover:bg-royalPurple/85 text-white">
                 <PaperAirplaneIcon className="w-4 h-4" />
                 <h1 className="text-lg font-bold">Get Started</h1>
             </button>
