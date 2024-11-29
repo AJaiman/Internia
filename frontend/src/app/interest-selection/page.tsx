@@ -4,6 +4,7 @@ import { AdjustmentsVerticalIcon, BeakerIcon, BoltIcon, BugAntIcon, BuildingOffi
 import { useSession } from "next-auth/react"
 import { FC, SVGProps, useState } from "react";
 import FieldPill from "../ui/field-pill";
+import { useRouter } from "next/navigation";
 
 type Field = [FC<SVGProps<SVGSVGElement>>, string, string]
 
@@ -11,6 +12,7 @@ export default function InterestSelection() {
     const { data: session } = useSession();
     const [fieldsChosen, setFieldsChosen] = useState<string[]>([]);
     const [isLoading, setIsLoading] = useState(false);
+    const router = useRouter();
     const fields: Field[] = [
         [BugAntIcon, "Biology", "biology"],
         [BeakerIcon, "Chemistry", "chemistry"],
@@ -75,8 +77,12 @@ export default function InterestSelection() {
                 throw new Error('Failed to get recommendations');
             }
 
-            // Redirect to dashboard
-            window.location.href = '/dashboard';
+            // Set the cookie for selected interests
+            document.cookie = 'selectedInterests=true; path=/';
+            localStorage.setItem('selectedInterests', 'true');
+
+            // Use router.push instead of window.location.href
+            router.push('/dashboard');
 
         } catch (error) {
             console.error('Error:', error);
@@ -117,9 +123,19 @@ export default function InterestSelection() {
                     )
                 }
             </div>
-            <button onClick={() => {handleGetStarted()}} className="flex flex-row gap-3 items-center justify-center w-[37%] h-14 mt-4 rounded-xl bg-royalPurple hover:bg-royalPurple/85 text-white">
-                <PaperAirplaneIcon className="w-4 h-4" />
-                <h1 className="text-lg font-bold">Get Started</h1>
+            <button 
+                onClick={handleGetStarted} 
+                className="flex flex-row gap-3 items-center justify-center w-[37%] h-14 mt-4 rounded-xl bg-royalPurple hover:bg-royalPurple/85 text-white"
+                disabled={isLoading}
+            >
+                {isLoading ? (
+                    <div className="animate-spin rounded-full h-4 w-4 border-t-2 border-b-2 border-white"></div>
+                ) : (
+                    <>
+                        <PaperAirplaneIcon className="w-4 h-4" />
+                        <h1 className="text-lg font-bold">Get Started</h1>
+                    </>
+                )}
             </button>
         </div>
     )
