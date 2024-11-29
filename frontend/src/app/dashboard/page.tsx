@@ -24,7 +24,7 @@ export default function DashboardPage() {
     useEffect(() => {
         const assertFieldsChosen = async () => {
             if (email) {
-                const response = await fetch(`${process.env.BACKEND_URL}/get_user_fields/${email}`)
+                const response = await fetch(`http://localhost:8000/get_user_fields/${email}`)
 
                 if (response.ok) {
                     const data = await response.json()
@@ -38,12 +38,12 @@ export default function DashboardPage() {
         const getRecommendedPaper = async () => {
             if (email && fieldsChosen) {
                 try {
-                    const response = await fetch(`${process.env.BACKEND_URL}/user/recommended-papers/${email}`);
+                    const response = await fetch(`http://localhost:8000/user/recommended-papers/${email}`);
                     if (response.ok) {
                         const data = await response.json()
                         const papers = data.papers
                         if (papers.length < paperThreshold) {
-                            const newPapers = await fetch(`${process.env.BACKEND_URL}/paper/recommendations/${email}`)
+                            const newPapers = await fetch(`http://localhost:8000/paper/recommendations/${email}`)
                             if (!newPapers.ok) {
                                 console.error("Error fetching new papers:", newPapers.statusText);
                             } else {

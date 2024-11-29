@@ -10,7 +10,7 @@ import { getServerSession } from "next-auth";
 export const metadata: Metadata = {
   title: "Internia",
   description: "A website that connects high schoolers to internships based off the papers they like and don't like.",
-  metadataBase: new URL('https://localhost:3000'),  // Update later
+  metadataBase: new URL('http://localhost:3000'),  // Update later
 };
 
 export default async function RootLayout({
@@ -23,7 +23,7 @@ export default async function RootLayout({
   return (
     <html lang="en">
       <head>
-        <link rel="icon" href="/icon.jpg" sizes="any" />
+        <link rel="shortcut icon" href="/favicon.ico" />
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
       </head>
       <body
