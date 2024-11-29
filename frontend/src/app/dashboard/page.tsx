@@ -64,8 +64,14 @@ export default function DashboardPage() {
     }, [refreshTrigger]);
 
     if (!recommendedPaper) {
-        return <div>Loading...</div>
+        return (
+            <div className="flex flex-col items-center justify-center w-full h-4/5">
+                <div className="animate-spin rounded-full h-16 w-16 border-t-2 border-b-2 border-royalPurple"></div>
+                <h2 className="mt-4 text-xl font-medium">Recommending Paper...</h2>
+            </div>
+        );
     }
+
     return (
         <>
             <Paper
