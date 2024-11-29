@@ -42,7 +42,8 @@ async def create_user(new_user: NewUser):
         saved_papers=[],
         saved_researchers=[],
         recommended_papers=[],
-        paper_history=[]
+        paper_history=[],
+        selectedInterests=False
     )
 
     # Add to DB

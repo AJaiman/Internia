@@ -12,6 +12,7 @@ class User(BaseModel):
     saved_researchers: list[str]
     recommended_papers: list[str]
     paper_history: list[str]
+    selectedInterests: bool
 
 class NewUser(BaseModel):
     first_name: str
