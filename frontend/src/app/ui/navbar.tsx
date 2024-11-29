@@ -10,6 +10,13 @@ export default function Navbar() {
     const pathname = usePathname();
     const { data: session } = useSession();
 
+    // Hide navbar on interest selection page
+    if (pathname === '/interest-selection') {
+        return (
+            null
+        );
+    }
+
     return (
         <div className="flex flex-row items-center justify-between w-screen h-auto px-12 py-6">
             <Link href="/">
