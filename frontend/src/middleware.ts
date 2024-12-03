@@ -21,13 +21,29 @@ export async function middleware(req: NextRequest) {
     return NextResponse.next();
   }
 
-  // Get selectedInterests from localStorage (client-side storage isn't available in middleware)
+  // Get selectedInterests from cookie
   const selectedInterests = req.cookies.get('selectedInterests')?.value === 'true';
 
-  // If interests aren't selected:
-  // 1. Redirect to interest-selection if trying to access other pages
-  // 2. Allow access to interest-selection page
-  if (!selectedInterests) {
+  if (!selectedInterests && session.email) {
+    try {
+      const response = await fetch(`http://localhost:8000/user/selected-interests/${session.email}`);
+      const data = await response.json();
+      
+      if (data.selectedInterests) {
+        // If backend confirms interests are selected, set the cookie and continue
+        const response = NextResponse.next();
+        response.cookies.set('selectedInterests', 'true', {
+          path: '/',
+          maxAge: 31536000,
+          sameSite: 'lax'
+        });
+        return response;
+      }
+    } catch (error) {
+      console.error('Error checking interests:', error);
+    }
+
+    // If no interests are selected or there was an error checking
     if (req.nextUrl.pathname !== '/interest-selection') {
       return NextResponse.redirect(new URL('/interest-selection', req.url));
     }
@@ -35,10 +51,12 @@ export async function middleware(req: NextRequest) {
   }
 
   // If interests are selected:
-  // 1. Redirect to dashboard if trying to access interest-selection
+  // 1. Redirect to dashboard if trying to access interest-selection or root path
   // 2. Allow access to other pages
-  if (selectedInterests && req.nextUrl.pathname === '/interest-selection') {
-    return NextResponse.redirect(new URL('/dashboard', req.url));
+  if (selectedInterests) {
+    if (req.nextUrl.pathname === '/interest-selection' || req.nextUrl.pathname === '/') {
+      return NextResponse.redirect(new URL('/dashboard', req.url));
+    }
   }
 
   return NextResponse.next();

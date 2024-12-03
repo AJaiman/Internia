@@ -78,7 +78,7 @@ export default function InterestSelection() {
             }
 
             // Set the cookie for selected interests
-            document.cookie = 'selectedInterests=true; path=/';
+            document.cookie = 'selectedInterests=true; path=/; max-age=31536000; SameSite=Lax';
             localStorage.setItem('selectedInterests', 'true');
 
             // Use router.push instead of window.location.href
