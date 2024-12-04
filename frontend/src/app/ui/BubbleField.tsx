@@ -11,7 +11,23 @@ type BubbleProps = {
   isSelected: boolean;
 };
 
-const Bubble = ({ fieldIcon: Icon, fieldName, rawFieldName, setFieldsChosen, x, y, isSelected }: BubbleProps) => {
+type Field = [FC<SVGProps<SVGSVGElement>>, string, string];
+
+interface BubbleFieldProps {
+  fields: Field[];
+  fieldsChosen: string[];
+  setFieldsChosen: (field: string, isRemoving: boolean) => void;
+}
+
+const Bubble: FC<BubbleProps> = ({ 
+  fieldIcon: Icon, 
+  fieldName, 
+  rawFieldName, 
+  setFieldsChosen, 
+  x, 
+  y, 
+  isSelected 
+}) => {
   return (
     <motion.div
       className={`absolute cursor-pointer select-none`}
@@ -42,9 +58,9 @@ const Bubble = ({ fieldIcon: Icon, fieldName, rawFieldName, setFieldsChosen, x, 
   );
 };
 
-export default function BubbleField({ fields, fieldsChosen, setFieldsChosen }) {
+const BubbleField: FC<BubbleFieldProps> = ({ fields, fieldsChosen, setFieldsChosen }) => {
   const containerRef = useRef<HTMLDivElement>(null);
-  const mouseRef = useRef({ x: 0, y: 0 });
+  const mouseRef = useRef<{ x: number; y: number }>({ x: 0, y: 0 });
 
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
@@ -60,7 +76,7 @@ export default function BubbleField({ fields, fieldsChosen, setFieldsChosen }) {
     return () => window.removeEventListener('mousemove', handleMouseMove);
   }, []);
 
-  const calculatePosition = (index: number, totalFields: number) => {
+  const calculatePosition = (index: number, totalFields: number): { x: number; y: number } => {
     // Create a grid-like layout with 5 columns
     const columns = 5;
     const rows = Math.ceil(totalFields / columns);
@@ -94,6 +110,10 @@ export default function BubbleField({ fields, fieldsChosen, setFieldsChosen }) {
     };
   };
 
+  if (!fields || fields.length === 0) {
+    return null;
+  }
+
   return (
     <div ref={containerRef} className="relative w-full h-full flex items-center justify-center pt-16">
       {fields.map((field, index) => {
@@ -114,4 +134,6 @@ export default function BubbleField({ fields, fieldsChosen, setFieldsChosen }) {
       })}
     </div>
   );
-}
+};
+
+export default BubbleField;
