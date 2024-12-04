@@ -21,7 +21,8 @@ export type Publication = {
 export type LongformPublication = Publication & {
   abstract: string,
   content: string,
-  fullDate: string // Determine whether we should keep this as a string or change to a datetime object,
+  semanticLink?: string,
+  fullDate: string 
   link: string,
   match: number,
   id: string,
