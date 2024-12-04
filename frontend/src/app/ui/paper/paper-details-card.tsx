@@ -1,4 +1,5 @@
 import { CalendarIcon, LinkIcon, BookOpenIcon } from "@heroicons/react/24/outline";
+import { useState } from "react";
 
 interface PaperDetailsProps {
     publishDate: string;
@@ -7,6 +8,18 @@ interface PaperDetailsProps {
 }
 
 export default function PaperDetailsCard({ publishDate, doi, scholarLink }: PaperDetailsProps) {
+    const [copied, setCopied] = useState(false);
+
+    const copyToClipboard = async () => {
+        try {
+            await navigator.clipboard.writeText(doi);
+            setCopied(true);
+            setTimeout(() => setCopied(false), 2000);
+        } catch (err) {
+            console.error('Failed to copy:', err);
+        }
+    };
+
     return (
         <div className="relative w-full z-0">
             <div className="absolute -inset-1 bg-gradient-to-tr from-royalBlue/50 to-fuchsia-400/50 blur-md rounded-[8px] z-0"></div>
@@ -27,14 +40,12 @@ export default function PaperDetailsCard({ publishDate, doi, scholarLink }: Pape
                     </div>
                     <div>
                         <h3 className="text-sm font-medium text-royalPurple/70">DOI</h3>
-                        <a 
-                            href={doi}
+                        <button 
+                            onClick={copyToClipboard}
                             className="text-royalPurple font-medium hover:text-royalBlue transition-colors"
-                            target="_blank"
-                            rel="noopener noreferrer"
                         >
-                            View DOI
-                        </a>
+                            {copied ? 'Copied!' : 'Copy DOI'}
+                        </button>
                     </div>
                 </div>
 
