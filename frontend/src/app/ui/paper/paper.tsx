@@ -86,7 +86,7 @@ export default function Paper({
                 <PaperDetailsCard 
                     publishDate={publication.fullDate}
                     doi={publication.link}
-                    scholarLink="#"
+                    scholarLink={publication.semanticLink}
                 />
                 <AbstractCard description={publication.abstract} />
                 

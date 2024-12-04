@@ -28,6 +28,7 @@ export default function IndividualPaper({
                 <PaperDetailsCard 
                     publishDate={publication.fullDate}
                     doi={publication.link}
+                    scholarLink={publication.semanticLink}
                 />
                 <AbstractCard description={publication.abstract} />
             </div>

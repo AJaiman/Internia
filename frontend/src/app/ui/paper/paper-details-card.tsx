@@ -6,7 +6,7 @@ interface PaperDetailsProps {
     scholarLink?: string;
 }
 
-export default function PaperDetailsCard({ publishDate, doi, scholarLink = "#" }: PaperDetailsProps) {
+export default function PaperDetailsCard({ publishDate, doi, scholarLink }: PaperDetailsProps) {
     return (
         <div className="relative w-full z-0">
             <div className="absolute -inset-1 bg-gradient-to-tr from-royalBlue/50 to-fuchsia-400/50 blur-md rounded-[8px] z-0"></div>

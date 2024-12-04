@@ -35,6 +35,7 @@ export default function Page(props: { params: { id: string } }) {
                         yearPublished: paper.year || 'N/A',
                         abstract: paper.abstract || 'No abstract available',
                         content: paper.openAccessPdf?.url || null,
+                        semanticLink: paper.url || null,
                         fullDate: paper.publicationDate || null,
                         link: paper.externalIds?.DOI || null,
                         match: 0.99,
@@ -71,6 +72,7 @@ export default function Page(props: { params: { id: string } }) {
                     link: publication.link,
                     abstract: publication.abstract,
                     content: publication.content,
+                    semanticLink: publication.semanticLink,
                     match: publication.match,
                     id: publication.id
                 }}

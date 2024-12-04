@@ -47,6 +47,7 @@ export default function DashboardPage() {
                             fullDate: papers[0].publicationDate || null,
                             link: papers[0].externalIds?.DOI || null,
                             abstract: papers[0].abstract || 'No abstract available',
+                            semanticLink: papers[0].url || null,
                             content: papers[0].openAccessPdf?.url,
                             match: 0.99,
                             id: papers[0].paperId
