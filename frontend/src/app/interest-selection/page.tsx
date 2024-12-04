@@ -3,8 +3,8 @@
 import { AdjustmentsVerticalIcon, BeakerIcon, BoltIcon, BugAntIcon, BuildingOfficeIcon, CalculatorIcon, ChartBarIcon, CogIcon, ComputerDesktopIcon, CpuChipIcon, CubeTransparentIcon, GlobeAmericasIcon, HeartIcon, LightBulbIcon, PaperAirplaneIcon, PresentationChartBarIcon, SparklesIcon, UserIcon, UsersIcon } from "@heroicons/react/24/solid";
 import { useSession } from "next-auth/react"
 import { FC, SVGProps, useState } from "react";
-import FieldPill from "../ui/field-pill";
 import { useRouter } from "next/navigation";
+import BubbleField from "../ui/BubbleField";
 
 type Field = [FC<SVGProps<SVGSVGElement>>, string, string]
 
@@ -94,7 +94,7 @@ export default function InterestSelection() {
 
     if (isLoading) {
         return (
-            <div className="flex flex-col items-center justify-center w-full h-4/5">
+            <div className="flex flex-col items-center justify-center w-full h-screen">
                 <div className="animate-spin rounded-full h-16 w-16 border-t-2 border-b-2 border-royalPurple"></div>
                 <h2 className="mt-4 text-xl font-medium">Setting up your preferences...</h2>
             </div>
@@ -102,30 +102,27 @@ export default function InterestSelection() {
     }
 
     return (
-        <div className="flex flex-col w-full h-4/5 p-4">
-            <h1 className="text-2xl font-medium">
-                Welcome, {session?.user?.name?.split(/\s+/)[0]}!
-            </h1>
-            <h1 className="font-light">
-                Choose at least <span className="font-bold">one</span> field that you're interested in to get started with Internia.
-            </h1>
-            <div className="grid grid-rows-5 grid-cols-5 w-full h-[40vh] mt-4">
-                {
-                    fields.map(
-                        ([fieldIcon, fieldName, apiFieldName]) => (
-                            <FieldPill 
-                                key={fieldName} 
-                                rawFieldName={apiFieldName} 
-                                fieldName={fieldName} 
-                                fieldIcon={fieldIcon} 
-                                setFieldsChosen={modifyingFieldsChosen} />
-                        )
-                    )
-                }
+        <div className="flex flex-col items-center w-full min-h-screen p-8">
+            <div className="text-center mb-8">
+                <h1 className="text-4xl font-medium mb-2">
+                    Welcome, {session?.user?.name?.split(/\s+/)[0]}!
+                </h1>
+                <h2 className="text-xl font-light">
+                    Choose at least <span className="font-bold">one</span> field that interests you
+                </h2>
             </div>
+            
+            <div className="flex-1 w-full mb-24">
+                <BubbleField 
+                    fields={fields} 
+                    fieldsChosen={fieldsChosen} 
+                    setFieldsChosen={modifyingFieldsChosen} 
+                />
+            </div>
+
             <button 
                 onClick={handleGetStarted} 
-                className="flex flex-row gap-3 items-center justify-center w-[37%] h-14 mt-4 rounded-xl bg-royalPurple hover:bg-royalPurple/85 text-white"
+                className="fixed bottom-8 flex flex-row gap-3 items-center justify-center w-[300px] h-14 rounded-xl bg-royalPurple hover:bg-royalPurple/85 text-white transform transition-all duration-300 hover:scale-105"
                 disabled={isLoading}
             >
                 {isLoading ? (
@@ -138,5 +135,5 @@ export default function InterestSelection() {
                 )}
             </button>
         </div>
-    )
+    );
 }
