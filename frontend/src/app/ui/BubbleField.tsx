@@ -44,7 +44,7 @@ const Bubble: FC<BubbleProps> = ({
       onClick={() => setFieldsChosen(rawFieldName, isSelected)}
     >
       <div
-        className={`flex flex-col items-center justify-center p-4 rounded-2xl transition-colors duration-300 min-w-[160px]
+        className={`flex flex-col items-center justify-center w-full h-full p-5 rounded-2xl transition-colors duration-300 min-w-[160px]
           ${isSelected 
             ? 'bg-royalPurple text-white shadow-lg' 
             : 'bg-white/90 text-royalPurple hover:bg-white hover:shadow-md backdrop-blur-sm'
@@ -52,7 +52,7 @@ const Bubble: FC<BubbleProps> = ({
         `}
       >
         <Icon className="w-6 h-6" />
-        <span className="mt-2 text-sm font-medium text-center">{fieldName}</span>
+        <span className="mt-2 text-xs font-medium text-center">{fieldName}</span>
       </div>
     </motion.div>
   );

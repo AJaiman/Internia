@@ -95,8 +95,7 @@ export default function Paper({
                         onClick={handleGood}
                         className="relative flex-1 group"
                     >
-                        <div className="absolute -inset-1 bg-gradient-to-r from-royalBlue/50 to-fuchsia-400/50 blur-md rounded-[8px] opacity-75 group-hover:opacity-100 transition-opacity"></div>
-                        <div className="relative flex items-center justify-center gap-2 py-3 bg-white/70 backdrop-blur-sm rounded-[8px] border border-white/20 text-royalPurple font-medium">
+                        <div className="relative flex items-center justify-center gap-2 py-3 bg-royalPurple hover:bg-royalPurple/90 rounded-[8px] border border-white/20 text-white font-bold">
                             <HandThumbUpIcon className="w-5 h-5" />
                             Good
                         </div>
@@ -105,8 +104,7 @@ export default function Paper({
                         onClick={handleBad}
                         className="relative flex-1 group"
                     >
-                        <div className="absolute -inset-1 bg-gradient-to-r from-royalBlue/50 to-fuchsia-400/50 blur-md rounded-[8px] opacity-75 group-hover:opacity-100 transition-opacity"></div>
-                        <div className="relative flex items-center justify-center gap-2 py-3 bg-white/70 backdrop-blur-sm rounded-[8px] border border-white/20 text-royalPurple font-medium">
+                        <div className="relative flex items-center justify-center gap-2 py-3 bg-royalPurple/80 hover:bg-royalPurple/70 rounded-[8px] border border-white/20 text-white font-bold">
                             <HandThumbDownIcon className="w-5 h-5" />
                             Bad
                         </div>

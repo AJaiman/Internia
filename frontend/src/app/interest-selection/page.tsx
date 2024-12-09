@@ -5,6 +5,7 @@ import { useSession } from "next-auth/react"
 import { FC, SVGProps, useState } from "react";
 import { useRouter } from "next/navigation";
 import BubbleField from "../ui/BubbleField";
+import SpinnerIcon from "../ui/spinner";
 
 type Field = [FC<SVGProps<SVGSVGElement>>, string, string]
 
@@ -95,7 +96,7 @@ export default function InterestSelection() {
     if (isLoading) {
         return (
             <div className="flex flex-col items-center justify-center w-full h-screen">
-                <div className="animate-spin rounded-full h-16 w-16 border-t-2 border-b-2 border-royalPurple"></div>
+                <SpinnerIcon size="64" />
                 <h2 className="mt-4 text-xl font-medium">Setting up your preferences...</h2>
             </div>
         );
@@ -103,11 +104,11 @@ export default function InterestSelection() {
 
     return (
         <div className="flex flex-col items-center w-full min-h-screen p-8">
-            <div className="text-center mb-8">
+            <div className="text-center mt-8">
                 <h1 className="text-4xl font-medium mb-2">
-                    Welcome, {session?.user?.name?.split(/\s+/)[0]}!
+                    Welcome, <span className="font-black">{session?.user?.name?.split(/\s+/)[0]}</span>!
                 </h1>
-                <h2 className="text-xl font-light">
+                <h2 className="text-lg font-light">
                     Choose at least <span className="font-bold">one</span> field that interests you
                 </h2>
             </div>
