@@ -242,6 +242,7 @@ async def add_paper_history(email: str, paper_id: str):
 @router.post("/user/interests/{email}")
 async def update_interests(email: str, interests: list[str]):
     user = users_collection.find_one({"email": email})
+    
     if not user:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="User not found")
     
