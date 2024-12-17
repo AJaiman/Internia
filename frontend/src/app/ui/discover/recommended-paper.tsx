@@ -6,9 +6,23 @@ import { useSession } from "next-auth/react";
 
 export default function RecommendedPaper({ publication, addFavoriteButton = false, isFavorited = false, onFavorite, onUnfavorite } : { publication: LongformPublication, addFavoriteButton?: boolean, isFavorited?: boolean, onFavorite?: () => void, onUnfavorite?: () => void }) {
     const {data: session} = useSession()
+    let currentLength = 0;
+
     const truncatedAbstract = publication.abstract 
-        ? publication.abstract.split(/\s+/).slice(0, 30).join(" ") + "..."
+        ? publication.abstract.split(/\s+/).filter((word, index, arr) => {
+            // Calculate the new length if this word were added
+            const newLength = currentLength + (currentLength > 0 ? 1 : 0) + word.length;
+    
+            if (newLength > 275) {
+                arr.splice(index); // Remove remaining words once the limit is exceeded
+                return false;
+            }
+    
+            currentLength = newLength;
+            return true;
+        }).join(" ") + "..."
         : "No abstract available";
+
     const truncatedAuthors = publication.authors.length <= 3 ? 
         publication.authors.map((author) => author.name.split(/\s+/).slice(-1)[0]).join(", ")
         : publication.authors[0].name.split(/\s+/).slice(-1)[0] + " et al."
@@ -50,16 +64,16 @@ export default function RecommendedPaper({ publication, addFavoriteButton = fals
     }
 
     return (
-        <MainComponent href={`/discover/paper/${publication.id}`} className={`relative flex-shrink-0 flex flex-row w-full h-32 transition ${addFavoriteButton ? '' : 'hover:translate-x-3'}`}>
-            <div className="flex items-center justify-center w-32 h-32 bg-royalBlue/75 rounded-l-xl">
+        <MainComponent href={`/discover/paper/${publication.id}`} className={`relative flex-shrink-0 flex flex-row w-full h-36 transition ${addFavoriteButton ? '' : 'hover:translate-x-3'}`}>
+            <div className="flex items-center justify-center w-36 h-36 bg-royalBlue/75 rounded-l-xl">
                 <NewspaperIcon className="w-16 h-16 text-royalPurple" />
             </div>
             <div className="flex flex-col flex-1 justify-around py-1 pl-8 h-full bg-royalBlue/20 rounded-r-xl">
                 <div>
-                    <SecondaryComponent href={`/discover/paper/${publication.id}`} className={`text-lg text-royalPurple font-bold ${addFavoriteButton ? 'hover:underline hover:text-royalBlue' : ''}`}>
+                    <SecondaryComponent href={`/discover/paper/${publication.id}`} className={`w-5/6 text-[16px] text-royalPurple font-bold ${addFavoriteButton ? 'hover:underline hover:text-royalBlue' : ''}`}>
                         {publication.name}
                     </SecondaryComponent>
-                    <div className="w-4/5">
+                    <div className="w-5/6">
                         <p className="text-xs text-royalPurple font-light">
                             <span className="font-semibold">Synopsis: </span>
                             {truncatedAbstract}

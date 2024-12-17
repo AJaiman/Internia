@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 import Paper from "@/app/ui/paper/paper";
 import { useSession } from "next-auth/react";
 import { LongformPublication } from "@/app/lib/types";
-import SpinnerIcon from "@/app/ui/spinner";
+import { PaperSkeleton } from "@/app/ui/skeletons";
 
 
 export default function DashboardPage() {
@@ -67,11 +67,10 @@ export default function DashboardPage() {
 
     if (!recommendedPaper) {
         return (
-            <div className="flex flex-col items-center justify-center w-full h-4/5">
-                <SpinnerIcon size="64" />
-                <h2 className="mt-4 text-xl font-medium">Recommending Paper...</h2>
-            </div>
-        );
+            <>
+                <PaperSkeleton />
+            </>
+        )
     }
 
     return (

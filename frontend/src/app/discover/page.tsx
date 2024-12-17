@@ -64,8 +64,8 @@ export default function Page() {
     }
 
     return (
-        <div className="self-center w-[85%] flex flex-col -mt-4">
-            <div className="mt-4 h-[65vh] overflow-y-scroll px-4">
+        <div className="self-center w-[95%] flex flex-col -mt-4">
+            <div className="mt-4 h-[55vh] overflow-y-scroll px-4">
                 {
                     searchResults.map((obj, index) => <div key={index} className="py-4">
                         <RecommendedPaper publication={obj.result} />
