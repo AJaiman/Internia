@@ -3,10 +3,20 @@
 import { signIn } from 'next-auth/react'
 
 export default function SignInButton() {
+  const handleSignIn = async () => {
+    try {
+      await signIn('google', { 
+        callbackUrl: '/api/auth/signin-redirect'  // We'll create this API route to handle the redirect
+      });
+    } catch (error) {
+      console.error('Sign in error:', error);
+    }
+  };
+
   return (
     <button
       className="flex w-full items-center justify-center gap-5 rounded-xl bg-white px-4 py-4 text-sm font-bold drop-shadow-md hover:bg-gray-50 border border-royalPurple/25"
-      onClick={() => signIn('google', { callbackUrl: 'http://localhost:3000/interest-selection' })}
+      onClick={handleSignIn}
     >
       <GoogleLogo />
       <p className="text-lg">Sign in with Google</p>
