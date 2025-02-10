@@ -1,40 +1,67 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Internia - Research Paper Discovery Platform
 
-## Getting Started
+## Overview
+Internia is an intelligent platform designed to help students discover and explore research papers based on their academic interests. By leveraging user feedback and interests, Internia creates a personalized learning path for students interested in pursuing research internships.
 
-First, pull the code and install the dependencies:
+## Key Features
 
-npm install
+### 1. Interest-Based Paper Recommendations
+- Select from multiple fields of interest
+- Receive personalized paper recommendations
+- Discover interdisciplinary research opportunities
 
-Then run the server:
+### 2. Interactive Paper Rating System
+- Like or dislike papers to refine recommendations
+- Save interesting papers for later reference
+- Track your paper reading history
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+### 3. Smart Filtering
+- Access only open-access papers
+- English-language papers only
+- Detailed paper information including:
+  - Publication dates
+  - Author information
+  - DOI links
+  - Abstracts
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Technology Stack
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Frontend
+- Next.js 14
+- TypeScript
+- Tailwind CSS
+- NextAuth.js for authentication
+- Vercel Analytics
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+### Backend
+- Python FastAPI
+- MongoDB
+- Semantic Scholar API integration
 
-## Learn More
+## How It Works
 
-To learn more about Next.js, take a look at the following resources:
+1. **Initial Setup**
+   - Sign in with your account
+   - Select your fields of interest
+   - Receive initial paper recommendations
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+2. **Paper Discovery**
+   - Browse recommended papers
+   - Rate papers (like/dislike)
+   - Save interesting papers
+   - View paper details and abstracts
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+3. **Recommendation Refinement**
+   - System learns from your interactions
+   - Recommendations become more targeted
+   - Discover related research areas
 
-## Deploy on Vercel
+## Acknowledgments
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- Semantic Scholar API for research paper data
+- MongoDB Atlas for database hosting
+- Vercel for application hosting
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+## Contact
+
+For questions or support, please reach out to [aravjaiman@outlook.com](mailto:aravjaiman@outlook.com)
