@@ -21,7 +21,7 @@ export const authOptions: AuthOptions = {
       }
       
       try {
-        const response = await fetch('http://localhost:8000/user', {
+        const response = await fetch(`${process.env.API_URL}/user`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",

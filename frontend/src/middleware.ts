@@ -26,7 +26,7 @@ export async function middleware(req: NextRequest) {
 
   if (!selectedInterests && session.email) {
     try {
-      const response = await fetch(`http://localhost:8000/user/selected-interests/${session.email}`);
+      const response = await fetch(`${process.env.API_URL}/user/selected-interests/${session.email}`);
       const data = await response.json();
       
       if (data.selectedInterests) {

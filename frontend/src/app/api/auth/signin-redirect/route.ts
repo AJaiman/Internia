@@ -9,7 +9,7 @@ export async function GET(req: NextRequest) {
   }
 
   try {
-    const response = await fetch(`http://localhost:8000/user/selected-interests/${session.email}`);
+    const response = await fetch(`${process.env.API_URL}/user/selected-interests/${session.email}`);
     const data = await response.json();
 
     if (data.selectedInterests) {

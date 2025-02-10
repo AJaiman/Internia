@@ -13,7 +13,7 @@ export default function Page(props: { params: { id: string } }) {
     useEffect(() => {
         const fetchPaper = async () => {
             try {
-                const response = await fetch(`http://localhost:8000/paper/${id}`)
+                const response = await fetch(`${process.env.API_URL}/paper/${id}`)
                 if (response.ok) {
                     const paper = await response.json()
                     console.log(paper)

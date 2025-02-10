@@ -59,7 +59,7 @@ export default function InterestSelection() {
         setIsLoading(true);
         try {
             // Update user interests
-            const interestsResponse = await fetch(`http://localhost:8000/user/interests/${session?.user?.email}`, {
+            const interestsResponse = await fetch(`${process.env.API_URL}/user/interests/${session?.user?.email}`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -72,7 +72,7 @@ export default function InterestSelection() {
             }
 
             // Get initial recommendations
-            const recommendationsResponse = await fetch(`http://localhost:8000/paper/recommendations/${session?.user?.email}`);
+            const recommendationsResponse = await fetch(`${process.env.API_URL}/paper/recommendations/${session?.user?.email}`);
             
             if (!recommendationsResponse.ok) {
                 throw new Error('Failed to get recommendations');

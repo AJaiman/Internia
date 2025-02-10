@@ -15,7 +15,7 @@ export default function Page() {
     useEffect(() => { const fetchPapers = async () => {
         if (session?.user?.email) {
             try {
-                const response = await fetch(`http://localhost:8000/user/saved-papers/${session.user.email}`)
+                const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/user/saved-papers/${session.user.email}`)
                 console.log(response)
                 if (response.ok) {
                     const data = await response.json()

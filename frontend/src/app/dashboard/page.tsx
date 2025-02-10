@@ -24,12 +24,13 @@ export default function DashboardPage() {
         const getRecommendedPaper = async () => {
             if (email) {
                 try {
-                    const response = await fetch(`http://localhost:8000/user/recommended-papers/${email}`);
+                    console.log(process.env.NEXT_PUBLIC_API_URL)
+                    const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/user/recommended-papers/${email}`);
                     if (response.ok) {
                         const data = await response.json()
                         const papers = data.papers
                         if (papers.length < paperThreshold) {
-                            const newPapers = await fetch(`http://localhost:8000/paper/recommendations/${email}`)
+                            const newPapers = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/paper/recommendations/${email}`)
                             if (!newPapers.ok) {
                                 console.error("Error fetching new papers:", newPapers.statusText);
                             } else {
